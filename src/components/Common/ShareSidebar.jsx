@@ -1,4 +1,4 @@
-import React from 'react';
+// import React from 'react';
 import { FaWhatsapp, FaPinterest, FaTwitter, FaFacebook, FaLinkedin, FaEnvelope } from 'react-icons/fa';
 
 function ShareSidebar() {
@@ -6,7 +6,7 @@ function ShareSidebar() {
   const shareText = 'Check out this awesome content!'; // Replace with your share text
 
   return (
-    <div className="fixed left-0 top-1/3 z-50 flex flex-col items-center bg-white shadow-lg p-3 rounded-r-lg">
+    <div className="fixed left-0 top-1/4 z-50 flex flex-col items-center bg-white bg-opacity-25 shadow-lg p-2 rounded-r-lg">
       {/* Shares Counter */}
       <div className="text-center mb-4">
         <h2 className="text-xl font-bold text-gray-700">2.1k</h2>

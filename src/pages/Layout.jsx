@@ -1,8 +1,10 @@
 // import React from 'react'
 
 import CustomNavbar from "../components/Common/CustomNavbar"
+import Footer from "../components/Common/Footer"
 import ShareSidebar from "../components/Common/ShareSidebar"
 
+// eslint-disable-next-line react/prop-types
 function Layout({children}) {
   return (
     <>
@@ -12,6 +14,8 @@ function Layout({children}) {
             {children}
 
         </div>
+
+        <Footer/>
     </>
   )
 }

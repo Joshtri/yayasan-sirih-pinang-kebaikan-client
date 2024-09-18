@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Navbar } from 'flowbite-react';
 import { Link } from 'react-router-dom';
-import yayasanPublisherLogo from '../../assets/logo.png'
+// import yayasanPublisherLogo from '../../assets/logo.png'
 
 const CustomNavbar = () => {
   const [isOpen, setIsOpen] = useState(false);
