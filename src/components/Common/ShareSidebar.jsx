@@ -9,7 +9,7 @@ function ShareSidebar() {
     <div className="fixed left-0 top-1/4 z-50 flex flex-col items-center bg-white bg-opacity-25 shadow-lg p-2 rounded-r-lg">
       {/* Shares Counter */}
       <div className="text-center mb-4">
-        <h2 className="text-xl font-bold text-gray-700">2.1k</h2>
+        <h2 className="text-xl font-bold text-gray-700">0</h2>
         <p className="text-sm text-gray-500">Shares</p>
       </div>
 

@@ -22,6 +22,23 @@ function DescriptionContact() {
           Daftar Sekarang
         </button>
       </div> */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="bg-gray-800 p-6 rounded-lg shadow-lg flex flex-col items-center">
+                <h3 className="text-2xl font-semibold mb-4">Office Address</h3>
+                <p className="text-lg mb-4">1234 Main Street, City, Country</p>
+                <a href="mailto:info@example.com" className="text-blue-400 hover:underline">info@example.com</a>
+            </div>
+            <div className="bg-gray-800 p-6 rounded-lg shadow-lg flex flex-col items-center">
+                <h3 className="text-2xl font-semibold mb-4">Phone</h3>
+                <p className="text-lg mb-4">+1 (234) 567-8900</p>
+                <a href="tel:+12345678900" className="text-blue-400 hover:underline">Call Us</a>
+            </div>
+            <div className="bg-gray-800 p-6 rounded-lg shadow-lg flex flex-col items-center">
+                <h3 className="text-2xl font-semibold mb-4">Support</h3>
+                <p className="text-lg mb-4">For support, please contact us at:</p>
+                <a href="mailto:support@example.com" className="text-blue-400 hover:underline">support@example.com</a>
+            </div>
+        </div>
     </div>
   </section>
   )
