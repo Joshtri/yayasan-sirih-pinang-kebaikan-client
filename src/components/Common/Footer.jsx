@@ -1,28 +1,26 @@
-// import React from 'react';
+import React from 'react';
 import footerImg from '../../assets/footerImg.jpg';
 import { FaInstagram } from "react-icons/fa";
-import { CiFacebook} from "react-icons/ci";
+import { CiFacebook } from "react-icons/ci";
 import { MdLocationCity } from "react-icons/md";
-
 
 const Footer = () => {
     return (
-        <footer className="bg-purple-800 text-white py-6 px-4">
+        <footer className="bg-gradient-to-r from-purple-900 to-blue-900 text-white py-6 px-4">
             <div className="container mx-auto flex flex-col md:flex-row justify-between items-center space-y-6 md:space-y-0 md:space-x-12">
                 {/* Left Column: Image or Logo */}
                 <div className="flex items-center justify-center md:justify-start">
                     <img src={footerImg} alt="Logo" className="w-52 h-52 rounded-lg shadow-lg" />
-                    
                 </div>
                 <div>
-                <h2 className="text-xl font-semibold">Mari Membangun Bersama,</h2>
+                    <h2 className="text-xl font-semibold">Mari Membangun Bersama,</h2>
                     <h2 className="text-xl font-semibold">Menebarkan Kasih Allah Bagi Sesama</h2>
                 </div>
                 {/* Center Column: Contact Information */}
-                
-
                 <div className="text-center lg:text-left">
-                    <h2 className='text-3xl font-bold flex'> <MdLocationCity className=''/> Alamat : </h2>
+                    <h2 className='text-3xl font-bold flex'> 
+                        <MdLocationCity className=''/> Alamat : 
+                    </h2>
                     <p className="mt-3">Alamat: Jl. El Tari No. 23, Kel. Oebobo, Kec. Oebobo</p>
                     <p>Email: <a href="mailto:yasipikan@gmail.com" className="text-blue-300 hover:underline">yasipikan@gmail.com</a></p>
                     <p>Telepon: 
@@ -36,10 +34,10 @@ const Footer = () => {
                     <p className="mb-2">Social Media</p>
                     <div className="flex space-x-4 justify-center md:justify-start">
                         <a href="https://instagram.com/yasipikan" target="_blank" rel="noopener noreferrer" className="text-white hover:text-gray-300">
-                            <FaInstagram/>
+                            <FaInstagram />
                         </a>
                         <a href="https://facebook.com/yourpage" target="_blank" rel="noopener noreferrer" className="text-white hover:text-gray-300">
-                            <CiFacebook/>
+                            <CiFacebook />
                         </a>
                     </div>
                 </div>
