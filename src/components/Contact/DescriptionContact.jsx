@@ -34,7 +34,7 @@ function DescriptionContact() {
           </div>
           <div className="bg-gray-700 p-6 rounded-lg shadow-lg flex flex-col items-center">
             <h3 className="text-2xl font-semibold mb-4">E-Mail Resmi</h3>
-            <p className="text-lg mb-4">For support, please contact us at:</p>
+            <p className="text-lg mb-4 text-center">Untuk informasi lebih lanjut, kontak kami melalui:</p>
             <a href="mailto:yasipikan@gmail.com" className="text-blue-400 hover:underline">yasipikan@gmail.com</a>
           </div>
         </div>

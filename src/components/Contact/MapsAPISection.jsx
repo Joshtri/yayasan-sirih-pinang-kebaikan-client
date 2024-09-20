@@ -2,7 +2,7 @@ import React from 'react';
 
 function MapsAPISection() {
   return (
-    <div className="container mx-auto my-8 px-4">
+    <div className="container mx-auto my-8 px-4 pt-3">
         <h2 className='text-4xl text-center mb-10 font-bold'>LOKASI MAP</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* Google Maps Section */}
@@ -22,14 +22,14 @@ function MapsAPISection() {
           <div>
             <h3 className="text-2xl font-bold mb-4">Kunjungi Kantor Kami</h3>
             <p className="text-gray-700 mb-2">
-              Jika Anda sedang berkunjung ke Yogyakarta, silahkan mengunjungi kantor kami pada hari:
+              Jika Anda sedang berkunjung ke Kupang, silahkan mengunjungi kantor kami pada hari:
             </p>
             <ul className="list-disc list-inside mb-2">
               <li>Senin – Jumat</li>
               <li>Jam Kerja: 08.00 – 17.00</li>
             </ul>
             <p className="text-gray-700">
-              Alamat: Jl. Rajawali Gg. Elang 6 No.3, Drono, Sardonoharjo, Ngaglik, Sleman, DIY 55581
+              Alamat: Jl. El Tari No. 23, Kel. Oebobo, Kec. Oebobo
             </p>
           </div>
         </div>
