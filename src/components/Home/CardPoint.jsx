@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 function CardPoint() {
   return (
     <div className='flex justify-center mt-6'>
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-3">
         {/* First Card */}
         <Card className="text-center shadow-md p-3 max-w-xs">
           <div className="flex justify-center mb-1">

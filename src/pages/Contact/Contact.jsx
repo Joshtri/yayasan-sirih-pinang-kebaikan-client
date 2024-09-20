@@ -9,6 +9,7 @@ function Contact() {
       {/* Home Section with animated gradient */}
       <ContactMain/>
       <DescriptionContact/>
+      
     </Layout>
   )
 }
