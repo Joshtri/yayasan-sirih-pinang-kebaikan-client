@@ -9,6 +9,7 @@
 // export default ProtectedRoute;
 import { Navigate } from 'react-router-dom';
 
+// eslint-disable-next-line react/prop-types
 const ProtectedRoute = ({ element }) => {
   const user = localStorage.getItem("token");
   

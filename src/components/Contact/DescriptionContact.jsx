@@ -29,8 +29,9 @@ function DescriptionContact() {
                 <a href="mailto:info@example.com" className="text-blue-400 hover:underline">info@example.com</a>
             </div>
             <div className="bg-gray-800 p-6 rounded-lg shadow-lg flex flex-col items-center">
-                <h3 className="text-2xl font-semibold mb-4">Phone</h3>
-                <p className="text-lg mb-4">+1 (234) 567-8900</p>
+                <h3 className="text-2xl font-semibold mb-4">No. Handphone</h3>
+                <p className="text-lg mb-2">085237555490</p>
+                <p className="text-lg mb-2">085237555490</p>
                 <a href="tel:+12345678900" className="text-blue-400 hover:underline">Call Us</a>
             </div>
             <div className="bg-gray-800 p-6 rounded-lg shadow-lg flex flex-col items-center">

@@ -1,4 +1,3 @@
-import React from 'react';
 import { FaRegCheckCircle, FaBook, FaWallet, FaStore } from 'react-icons/fa';
 import { Card } from 'flowbite-react';
 import { Link } from 'react-router-dom';

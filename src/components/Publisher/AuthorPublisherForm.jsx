@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import  { useState } from 'react';
 import { Card, Button } from 'flowbite-react';
 import { FaUser, FaPhone, FaEnvelope, FaCalendarAlt, FaUniversity, FaBook } from 'react-icons/fa';
 import { MdAttachMoney } from 'react-icons/md';

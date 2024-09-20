@@ -1,4 +1,4 @@
-import React from 'react';
+// import React from 'react';
 import footerImg from '../../assets/footerImg.jpg';
 import { FaInstagram } from "react-icons/fa";
 import { CiFacebook } from "react-icons/ci";
