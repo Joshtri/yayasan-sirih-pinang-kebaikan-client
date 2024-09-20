@@ -6,8 +6,8 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import Home from './pages/Home/Home'
 import Contact from './pages/Contact/Contact'
 import Publish from './pages/Publishing/Publish'
-import LoginUser from './pages/LoginUser'
-import SignUpUser from './pages/SignUpUser'
+// import LoginUser from './pages/LoginUser'
+// import SignUpUser from './pages/SignUpUser'
 // import ProtectedRoute from './components/Auth/ProtectedRoute'
 
 import FormAuthorPublish from './pages/Publishing/FormAuthorPublish'
@@ -35,8 +35,8 @@ function App() {
           <Route path='/formulir-daftar' element={<FormAuthorPublish/>}/>
           <Route path='/cek-progress' element={<ProgressCek/>}/>
 
-          <Route path='/login' element={<LoginUser/>}/>
-          <Route path='/sign-up' element={<SignUpUser/>}/>
+          {/* <Route path='/login' element={<LoginUser/>}/>
+          <Route path='/sign-up' element={<SignUpUser/>}/> */}
         </Routes>
       </BrowserRouter>
 
