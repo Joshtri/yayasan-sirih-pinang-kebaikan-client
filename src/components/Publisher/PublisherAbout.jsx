@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import publisherImg from '../../assets/publisherImg.jpg';
 
 function PublisherAbout() {
