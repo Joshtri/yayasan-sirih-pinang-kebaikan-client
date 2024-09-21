@@ -1,5 +1,5 @@
 // src/FileUploadForm.js
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Card } from 'flowbite-react';
 import { FaEnvelope, FaPrint, FaUniversity, FaUser } from 'react-icons/fa';
@@ -39,6 +39,14 @@ const FileUploadForm = () => {
 
     const [error, setError] = useState(null);
     const [successMessage, setSuccessMessage] = useState(null); 
+
+
+    // useEffect to handle auto-scroll to the top when successMessage is set
+    useEffect(() => {
+    if (successMessage) {
+        window.scrollTo({ top: 0, behavior: 'smooth' }); // Scroll to top smoothly
+    }
+    }, [successMessage]); // Runs only when successMessage is set
 
     const handleFileChange = (event) => {
         const selectedFile = event.target.files[0];
@@ -119,15 +127,15 @@ const FileUploadForm = () => {
         <h1 className="text-2xl font-bold mb-2 text-center">FORMULIR DAFTAR MENJADI PENULIS</h1>
           {/* Conditional rendering of the success card */}
           {successMessage ? (
-              <div className="p-6 bg-green-100 text-green-700 rounded-lg shadow-md">
-                  <h2 className="text-xl font-bold mb-2">Pendaftaran Berhasil!</h2>
-                  <p>{successMessage}</p>
-                  <p>Selamat, Anda telah berhasil mendaftar sebagai penulis di penerbit kami.</p>
+            <div className="p-6 bg-green-100 text-green-700 rounded-lg shadow-md">
+                <h2 className="text-xl font-bold mb-2">Pendaftaran Berhasil!</h2>
+                <p>{successMessage}</p>
+                <p className='mb-5'>Selamat, Anda telah berhasil mendaftar sebagai penulis di penerbit kami.</p>
 
-                  <Link to='/' className="text-white text-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
+                <Link to='/' className="text-white text-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none mt-5 dark:focus:ring-blue-800">
                     KEMBALI KE BERANDA
-                  </Link>
-              </div>
+                </Link>
+            </div>
           ) : (
               <>
 

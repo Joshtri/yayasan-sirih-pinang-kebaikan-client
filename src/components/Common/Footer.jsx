@@ -53,7 +53,7 @@ const Footer = () => {
                     <p className="mb-2">Social Media</p>
                     <div className="flex space-x-4 justify-center md:justify-start">
                         <a
-                            href="https://instagram.com/yasipikan"
+                            href="https://www.instagram.com/yasipikan/"
                             target="_blank"
                             rel="noopener noreferrer"
                             className="text-white hover:text-gray-300"

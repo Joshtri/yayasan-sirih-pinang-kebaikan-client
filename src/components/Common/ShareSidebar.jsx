@@ -1,5 +1,6 @@
 import  { useState } from 'react';
 import { FaWhatsapp, FaPinterest, FaTwitter, FaFacebook, FaLinkedin, FaEnvelope, FaShareAlt } from 'react-icons/fa';
+import { FaSquareXTwitter } from 'react-icons/fa6';
 
 function ShareSidebar() {
   const [isOpen, setIsOpen] = useState(false); // State to toggle sidebar on mobile
@@ -47,10 +48,10 @@ function ShareSidebar() {
             href={`https://twitter.com/intent/tweet?url=${encodeURIComponent(shareUrl)}&text=${encodeURIComponent(shareText)}`}
             target="_blank"
             rel="noopener noreferrer"
-            className="bg-blue-400 text-white flex items-center justify-center px-4 py-2 rounded-full hover:bg-blue-500 transition duration-300"
+            className="bg-slate-800 text-white flex items-center justify-center px-4 py-2 rounded-full hover:bg-blue-500 transition duration-300"
             aria-label="Twitter"
           >
-            <FaTwitter size={20} />
+            <FaSquareXTwitter  size={20} />
           </a>
 
           <a
