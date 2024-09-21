@@ -1,4 +1,5 @@
 import { Card, Button } from 'flowbite-react';
+import { Link } from 'react-router-dom';
 
 function CekProgressDescription() {
   return (
@@ -25,9 +26,9 @@ function CekProgressDescription() {
         </p>
 
         {/* Input section (to be added for functionality) */}
-        <Button className="mt-4 w-1/2 bg-blue-600 hover:bg-blue-700 text-white">
+        <Link to='/section-cek-progress' className="mt-4 w-1/2 text-white text-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
           Cek Progress
-        </Button>
+        </Link>
 
         <p className='font-semibold'>
             Ada pertanyaan atau butuh bantuan? Hubungi Konsultan Penerbitan Kami dibawah ini !.

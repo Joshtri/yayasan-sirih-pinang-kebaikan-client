@@ -14,7 +14,7 @@ const CustomNavbar = () => {
       <Navbar fluid={true} rounded={true} className="bg-gradient-to-r from-gray-900 to-gray-700">
         {/* Logo with Brand Name */}
         <Navbar.Brand href="/">
-          <span className="text-2xl font-bold p-2 text-white">E-Publisher Yayasan Sirih Pinang Kebaikan</span>
+          <span className="text-2xl font-bold p-2 text-white">Yayasan Sirih Pinang Kebaikan</span>
         </Navbar.Brand>
 
         {/* Toggle Button for Mobile */}
@@ -59,13 +59,13 @@ const CustomNavbar = () => {
                   >
                     Cek Progres Buku
                   </Link>
-                  <Link
+                  {/* <Link
                     to="/service/support"
                     className="block px-4 py-2 text-gray-700 hover:bg-gray-100 hover:text-gray-900"
                     role="menuitem"
                   >
                     Support
-                  </Link>
+                  </Link> */}
                 </div>
               </div>
             )}

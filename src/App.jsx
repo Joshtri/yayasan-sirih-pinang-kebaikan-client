@@ -14,6 +14,7 @@ import FormAuthorPublish from './pages/Publishing/FormAuthorPublish'
 import ProgressCek from './pages/Service/ProgressCek'
 import ScrollToTop from './components/ScrollToUp'; // Import the ScrollToTop component
 import AboutPage from './pages/About/AboutPage'
+import ProgressSection from './pages/Service/ProgressSection'
 
 function App() {
   // const user = localStorage.getItem("token");
@@ -34,6 +35,8 @@ function App() {
           
           <Route path='/formulir-daftar' element={<FormAuthorPublish/>}/>
           <Route path='/cek-progress' element={<ProgressCek/>}/>
+
+          <Route path='/section-cek-progress' element={<ProgressSection/>}/>
 
           {/* <Route path='/login' element={<LoginUser/>}/>
           <Route path='/sign-up' element={<SignUpUser/>}/> */}
