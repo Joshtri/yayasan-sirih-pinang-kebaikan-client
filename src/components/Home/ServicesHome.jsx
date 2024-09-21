@@ -10,16 +10,15 @@ function ServicesHome() {
         {/* Top Card with Gradient Background */}
         <Card className="w-full max-w-4xl mx-auto shadow-lg bg-gradient-to-r from-blue-500 to-purple-600 text-white">
           {/* Centering the title only */}
-          <h2 className="text-center text-xl font-bold mb-3">E-PUBLISHER Yayasan Sirih Pinang Kebaikan</h2>
+          <h2 className="text-center text-xl font-bold mb-3">Yayasan Sirih Pinang Kebaikan</h2>
           
           {/* Left-aligned paragraph text */}
           <p className="mb-3">
-            Anda berasal dari Jabodetabek dan mau menerbitkan buku/kerjasama dengan Deepublish?
-            Tak perlu lagi ke Yogyakarta, karena Deepublish kini hadir di 
-            <span className="text-orange-300 font-semibold"> Jakarta!</span>
+          Anda berasal dari luar Kupang dan ingin menerbitkan buku atau bekerja sama dengan kami? Kini, Yayasan Sirih Pinang Kebaikan
+            <span className="text-orange-300 font-semibold"> menyediakan layanan penerbitan buku dan siap membantu Anda!</span>
           </p>
           <p className="mb-5">
-            Daftarkan diri Anda di Penerbit Deepublish Jakarta agar Kami makin cepat penuhi kebutuhan Anda.
+          Daftarkan diri Anda di Yayasan Sirih Pinang Kebaikan agar kami bisa lebih cepat memenuhi kebutuhan penerbitan Anda.
           </p>
           
           {/* Button centered */}
