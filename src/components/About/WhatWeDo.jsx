@@ -2,9 +2,9 @@ import React from 'react';
 import { Card } from 'flowbite-react';
 
 // Sample images (you can replace these with actual images)
-import isbnImg from '../../assets/ImgCover.jpg';
-import jemaatImg from '../../assets/ImgCover.jpg';
-import courseImg from '../../assets/ImgCover.jpg';
+import isbnImg from '../../assets/whatwedo/wedo1.jpg';
+import jemaatImg from '../../assets/whatwedo/wedo2.jpg';
+import courseImg from '../../assets/whatwedo/wedo3.jpg';
 
 function WhatWeDo() {
   return (

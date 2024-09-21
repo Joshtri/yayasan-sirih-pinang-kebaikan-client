@@ -4,6 +4,8 @@ import aboutImg from '../../assets/ImgCover.jpg'; // Example image import
 import joinUsImg from '../../assets/ImgCover.jpg';
 import WhatWeDo from './WhatWeDo';
 import Achievements from './Achievements';
+import Pembina from './Pembina';
+import Pengurus from './Pengurus';
 
 
 // Sample images (you can replace these with actual images)
@@ -49,6 +51,11 @@ function About() {
         </h1>
         {/* Apa yang Sudah Kami Buat? */}
         <Achievements/>
+
+
+        <Pembina/>
+
+        <Pengurus/>
 
         {/* Call to Action */}
         <Card className="mb-8 shadow-lg rounded-lg">

@@ -2,11 +2,11 @@ import React from 'react';
 import { Card } from 'flowbite-react';
 
 // Sample images (you can replace these with actual images)
-import pendetaImg from '../../assets/ImgCover.jpg';
-import gerejaImg from '../../assets/ImgCover.jpg';
-import pemberdayaanImg from '../../assets/ImgCover.jpg';
-import wifiImg from '../../assets/ImgCover.jpg';
-import materiImg from '../../assets/ImgCover.jpg';
+import pendetaImg from '../../assets/achievement/achieve1.jpg';
+import gerejaImg from '../../assets/achievement/achieve2.jpg';
+import pemberdayaanImg from '../../assets/achievement/achieve3.jpg';
+import wifiImg from '../../assets/achievement/achieve4.jpg';
+import materiImg from '../../assets/achievement/achieve5.jpg';
 
 function Achievements() {
   return (

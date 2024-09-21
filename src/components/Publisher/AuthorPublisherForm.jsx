@@ -1,332 +1,129 @@
-import  { useState } from 'react';
-import { Card, Button } from 'flowbite-react';
-import { FaUser, FaPhone, FaEnvelope, FaCalendarAlt, FaUniversity, FaBook } from 'react-icons/fa';
-import { MdAttachMoney } from 'react-icons/md';
+import React, { useState } from 'react';
+import axios from 'axios';
 
-function AuthorPublisherForm() {
-  const [formData, setFormData] = useState({
-    firstName: '',
-    lastName: '',
-    frontDegree: '',
-    backDegree: '',
-    phoneNumber: '',
-    email: '',
-    birthDate: '',
-    institution: '',
-    otherJob: '',
-    address: '',
-    selectedService: '',
-    bookSize: '',
-    pageCount: '',
-    printCount: '',
-    previouslyPublished: '',
-    communicationWithConsultant: '',
-    bookType: '',
-    manuscriptReadiness: '',
-  });
-
-  const handleChange = (e) => {
-    const { name, value, type, checked } = e.target;
-    setFormData({
-      ...formData,
-      [name]: type === 'checkbox' ? checked : value,
+const AuthorPublisherForm = () => {
+    const [formData, setFormData] = useState({
+        namaDepan: '',
+        namaBelakang: '',
+        gelarDepan: '',
+        gelarBelakang: '',
+        nomorTelepon: '',
+        email: '',
+        umur: '',
+        institusi: '',
+        pekerjaanLain: '',
+        alamat: '',
+        layananTerpilih: '',
+        judulBuku: '',
+        ukuranBuku: '',
+        jumlahHalaman: '',
+        jumlahCetak: '',
+        pernahDiterbitkan: '',
+        komunikasiDenganKonsultan: '',
+        jenisBuku: '',
+        kesiapanNaskah: '',
     });
-  };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log("Form submitted:", formData);
-    // Handle form submission (e.g., send data to server)
-  };
+    const [file, setFile] = useState(null);
+    const [error, setError] = useState('');
+    const [successMessage, setSuccessMessage] = useState('');
 
-  const inputClass = (filled) => 
-    `mt-1 p-2 border rounded-md w-full ${filled ? 'border-purple-800' : 'border-gray-300'}`;
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData({ ...formData, [name]: value });
+    };
 
-  return (
-    <div className="flex justify-center items-center pt-10 pb-10 min-h-screen bg-gray-100">
-      <Card className="w-full max-w-2xl p-6 shadow-lg">
-        <h1 className="text-2xl font-bold mb-2 text-center">FORM DAFTAR MENJADI PENULIS</h1>
+    const handleFileChange = (e) => {
+        setFile(e.target.files[0]);
+    };
 
-        <hr />
-        <form onSubmit={handleSubmit} className="space-y-6">
-          {/* Personal Information */}
-          <div className="flex flex-col">
-            <label className="mb-1 flex items-center">
-              <FaUser className="mr-2 text-blue-800" /> Nama Depan
-            </label>
-            <input
-              type="text"
-              name="firstName"
-              value={formData.firstName}
-              onChange={handleChange}
-              required
-              className={inputClass(formData.firstName)}
-            />
-          </div>
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        const formDataToSend = new FormData();
 
-          <div className="flex flex-col">
-            <label className="mb-1 flex items-center">
-              <FaUser className="mr-2 text-blue-800" /> Nama Belakang
-            </label>
-            <input
-              type="text"
-              name="lastName"
-              value={formData.lastName}
-              onChange={handleChange}
-              required
-              className={inputClass(formData.lastName)}
-            />
-          </div>
+        for (const key in formData) {
+            formDataToSend.append(key, formData[key]);
+        }
 
-          <div className="flex flex-col">
-            <label className="mb-1 flex items-center">
-              <FaUser className="mr-2 text-blue-800" /> Gelar Depan
-            </label>
-            <input
-              type="text"
-              name="frontDegree"
-              value={formData.frontDegree}
-              onChange={handleChange}
-              className={inputClass(formData.frontDegree)}
-            />
-          </div>
+        if (file) {
+            formDataToSend.append('fileBuku', file);
+        } else {
+            setError('File buku is required');
+            return;
+        }
 
-          <div className="flex flex-col">
-            <label className="mb-1 flex items-center">
-              <FaUser className="mr-2 text-blue-800" /> Gelar Belakang
-            </label>
-            <input
-              type="text"
-              name="backDegree"
-              value={formData.backDegree}
-              onChange={handleChange}
-              className={inputClass(formData.backDegree)}
-            />
-          </div>
+        try {
+            const response = await axios.post('/api/author-publisher', formDataToSend, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                },
+            });
+            setSuccessMessage(response.data.message);
+            setFormData({
+                namaDepan: '',
+                namaBelakang: '',
+                gelarDepan: '',
+                gelarBelakang: '',
+                nomorTelepon: '',
+                email: '',
+                umur: '',
+                institusi: '',
+                pekerjaanLain: '',
+                alamat: '',
+                layananTerpilih: '',
+                judulBuku: '',
+                ukuranBuku: '',
+                jumlahHalaman: '',
+                jumlahCetak: '',
+                pernahDiterbitkan: '',
+                komunikasiDenganKonsultan: '',
+                jenisBuku: '',
+                kesiapanNaskah: '',
+            });
+            setFile(null);
+            setError('');
+        } catch (error) {
+            console.error(error);
+            setError('Failed to upload data');
+        }
+    };
 
-          <div className="flex flex-col">
-            <label className="mb-1 flex items-center">
-              <FaPhone className="mr-2 text-blue-800" /> No Handphone
-            </label>
-            <input
-              type="tel"
-              name="phoneNumber"
-              value={formData.phoneNumber}
-              onChange={handleChange}
-              required
-              className={inputClass(formData.phoneNumber)}
-            />
-          </div>
-
-          <div className="flex flex-col">
-            <label className="mb-1 flex items-center">
-              <FaEnvelope className="mr-2 text-blue-800" /> Email
-            </label>
-            <input
-              type="email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-              required
-              className={inputClass(formData.email)}
-            />
-          </div>
-
-          <div className="flex flex-col">
-            <label className="mb-1 flex items-center">
-              <FaCalendarAlt className="mr-2 text-blue-800" /> Tanggal Lahir
-            </label>
-            <input
-              type="date"
-              name="birthDate"
-              value={formData.birthDate}
-              onChange={handleChange}
-              required
-              className={inputClass(formData.birthDate)}
-            />
-          </div>
-
-          <div className="flex flex-col">
-            <label className="mb-1 flex items-center">
-              <FaUniversity className="mr-2 text-blue-800" /> Institusi
-            </label>
-            <input
-              type="text"
-              name="institution"
-              value={formData.institution}
-              onChange={handleChange}
-              className={inputClass(formData.institution)}
-            />
-          </div>
-
-          <div className="flex flex-col">
-            <label className="mb-1 flex items-center">
-              <MdAttachMoney className="mr-2 text-blue-800" /> Pekerjaan Lainnya
-            </label>
-            <input
-              type="text"
-              name="otherJob"
-              value={formData.otherJob}
-              onChange={handleChange}
-              className={inputClass(formData.otherJob)}
-            />
-          </div>
-
-          <div className="flex flex-col">
-            <label className="mb-1 flex items-center">Alamat</label>
-            <textarea
-              name="address"
-              value={formData.address}
-              onChange={handleChange}
-              required
-              className={`mt-1 p-2 border rounded-md w-full ${formData.address ? 'border-purple-800' : 'border-gray-300'}`}
-            />
-          </div>
-
-          {/* Publishing Information */}
-          <div className="flex flex-col">
-            <label className="mb-1 flex items-center">
-              <FaBook className="mr-2 text-blue-800" /> Jasa yang Dipilih
-            </label>
-            <input
-              type="text"
-              name="selectedService"
-              value={formData.selectedService}
-              onChange={handleChange}
-              required
-              className={inputClass(formData.selectedService)}
-            />
-          </div>
-
-          <div className="flex flex-col">
-            <label className="mb-1 flex items-center">
-              <FaBook className="mr-2 text-blue-800" /> Ukuran Buku
-            </label>
-            <select
-              name="bookSize"
-              value={formData.bookSize}
-              onChange={handleChange}
-              required
-              className={inputClass(formData.bookSize)}
-            >
-              <option value="">Ukuran Buku</option>
-              <option value="A4">A4</option>
-              <option value="A5">A5</option>
-              <option value="B5">B5</option>
-            </select>
-          </div>
-
-          <div className="flex flex-col">
-            <label className="mb-1 flex items-center">
-              <FaBook className="mr-2 text-blue-800" /> Jumlah Halaman
-            </label>
-            <input
-              type="number"
-              name="pageCount"
-              value={formData.pageCount}
-              onChange={handleChange}
-              required
-              className={inputClass(formData.pageCount)}
-            />
-          </div>
-
-          <div className="flex flex-col">
-            <label className="mb-1 flex items-center">
-              <FaBook className="mr-2 text-blue-800" /> Jumlah Cetakan
-            </label>
-            <input
-              type="number"
-              name="printCount"
-              value={formData.printCount}
-              onChange={handleChange}
-              required
-              className={inputClass(formData.printCount)}
-            />
-          </div>
-
-          <div className="flex flex-col">
-            <label className="mb-1 flex items-center">
-              <FaBook className="mr-2 text-blue-800" /> Sudah Menerbitkan Buku?
-            </label>
-            <select
-              name="previouslyPublished"
-              value={formData.previouslyPublished}
-              onChange={handleChange}
-              required
-              className={inputClass(formData.previouslyPublished)}
-            >
-              <option value="">Sudah Menerbitkan Buku?</option>
-              <option value="yes">Ya</option>
-              <option value="no">Tidak</option>
-            </select>
-          </div>
-
-          <div className="flex flex-col">
-            <label className="mb-1 flex items-center">
-              <FaBook className="mr-2 text-blue-800" /> Berkomunikasi dengan Konsultan?
-            </label>
-            <select
-              name="communicationWithConsultant"
-              value={formData.communicationWithConsultant}
-              onChange={handleChange}
-              required
-              className={inputClass(formData.communicationWithConsultant)}
-            >
-              <option value="">Berkomunikasi dengan Konsultan?</option>
-              <option value="yes">Ya</option>
-              <option value="no">Tidak</option>
-            </select>
-          </div>
-
-          <div className="flex flex-col">
-            <label className="mb-1 flex items-center">
-              <FaBook className="mr-2 text-blue-800" /> Mau Menerbitkan Buku Apa?
-            </label>
-            <select
-              name="bookType"
-              value={formData.bookType}
-              onChange={handleChange}
-              required
-              className={inputClass(formData.bookType)}
-            >
-              <option value="">Mau Menerbitkan Buku Apa?</option>
-              <option value="fiction">Fiksi</option>
-              <option value="non-fiction">Non-Fiksi</option>
-              <option value="children">Anak-Anak</option>
-              <option value="academic">Akademik</option>
-            </select>
-          </div>
-
-          <div className="flex flex-col">
-            <label className="mb-1 flex items-center">
-              <FaBook className="mr-2 text-blue-800" /> Kesiapan Naskah
-            </label>
-            <select
-              name="manuscriptReadiness"
-              value={formData.manuscriptReadiness}
-              onChange={handleChange}
-              required
-              className={inputClass(formData.manuscriptReadiness)}
-            >
-              <option value="">Kesiapan Naskah</option>
-              <option value="ready">Siap</option>
-              <option value="not_ready">Belum Siap</option>
-            </select>
-          </div>
-          <hr />
-
-          <p>
-          Silakan CEK KEMBALI data diri Anda. Apabila data diri yang Anda masukkan sudah benar, silakan Anda KLIK TOMBOL DAFTAR di bawah ini.
-          </p>
-
-          {/* Submit Button */}
-          <Button type="submit" className="w-full mt-4 bg-blue-600 hover:bg-blue-700 text-white">
-            Daftar
-          </Button>
-        </form>
-      </Card>
-    </div>
-  );
-}
+    return (
+        <div className="max-w-xl mx-auto p-4 bg-white rounded-lg shadow-md">
+            <h2 className="text-2xl font-bold mb-4">Upload Author and Publisher Data</h2>
+            {error && <p className="text-red-600">{error}</p>}
+            {successMessage && <p className="text-green-600">{successMessage}</p>}
+            <form onSubmit={handleSubmit}>
+                {Object.keys(formData).map((key) => (
+                    <div key={key} className="mb-4">
+                        <label className="block text-sm font-medium text-gray-700">{key.replace(/([A-Z])/g, ' $1')}</label>
+                        <input
+                            type={key === 'umur' || key === 'jumlahHalaman' || key === 'jumlahCetak' ? 'number' : 'text'}
+                            name={key}
+                            placeholder={key.replace(/([A-Z])/g, ' $1')}
+                            value={formData[key]}
+                            onChange={handleChange}
+                            className="mt-1 p-2 border border-gray-300 rounded-md w-full"
+                            required
+                        />
+                    </div>
+                ))}
+                <div className="mb-4">
+                    <label className="block text-sm font-medium text-gray-700">File Buku</label>
+                    <input
+                        type="file"
+                        accept=".pdf,.doc,.docx"
+                        onChange={handleFileChange}
+                        className="mt-1 p-2 border border-gray-300 rounded-md w-full"
+                        required
+                    />
+                </div>
+                <button type="submit" className="w-full bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600 transition duration-200">
+                    Upload
+                </button>
+            </form>
+        </div>
+    );
+};
 
 export default AuthorPublisherForm;
