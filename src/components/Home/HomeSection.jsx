@@ -5,11 +5,13 @@ import { useState, useEffect } from "react";
 import img1 from '../../assets/homeImg/5599ab6ac6bbea99d4469756b7aeabbc.jpg'
 import img2 from '../../assets/homeImg/7d4ee2e0218165bb6c6aed083cb42ea8.jpg'
 import img3 from '../../assets/homeImg/cda8a82ffc3acd1300086dd7aef4fd74.jpg'
+import img4 from '../../assets/homeImg/e00203c0.jpg'
 // Array of background images
 const backgroundImages = [
   `url(${img1})`,
   `url(${img2})`,
   `url(${img3})`,
+  `url(${img4})`,
 ];
 
 function HomeSection() {
