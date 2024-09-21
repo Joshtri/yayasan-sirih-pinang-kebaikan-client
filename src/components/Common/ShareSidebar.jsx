@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import  { useState } from 'react';
 import { FaWhatsapp, FaPinterest, FaTwitter, FaFacebook, FaLinkedin, FaEnvelope, FaShareAlt } from 'react-icons/fa';
 
 function ShareSidebar() {
