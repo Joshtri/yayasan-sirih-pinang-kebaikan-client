@@ -422,7 +422,7 @@ const FileUploadForm = () => {
                     required
                   >
                     <option value="" disabled>Pilih Salah Satu</option>
-                    <option value="Sudah, pernah menerbitkan buku di deepublish">Sudah, pernah menerbitkan buku di deepublish</option>
+                    <option value="Sudah, pernah menerbitkan buku di deepublish">Sudah, pernah menerbitkan buku di </option>
                     <option value="Belum, pernah menerbitkan buku di deepublish">Belum, pernah menerbitkan buku di deepublish</option>
                     <option value="Sudah, pernah berkomunikasi dengan konsultan Deepublish">Sudah, pernah berkomunikasi dengan konsultan Deepublish</option>
                     <option value="Belum, pernah berkomunikasi dengan konsultan Deepublish">Belum, pernah berkomunikasi dengan konsultan Deepublish</option>

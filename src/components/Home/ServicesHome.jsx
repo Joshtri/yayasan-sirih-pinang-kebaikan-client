@@ -1,7 +1,7 @@
-import React from 'react';
-import { Button, Card } from 'flowbite-react';
+// import React from 'react';
+import { Card } from 'flowbite-react';
 import CardPoint from './CardPoint';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 
 function ServicesHome() {
   return (
@@ -25,7 +25,7 @@ function ServicesHome() {
           <div className="text-center">
             <a href='/'>
               <button  className="bg-white hover:bg-gray-300 text-blue-600 font-semibold py-2 px-6 rounded-lg shadow-md w-1/2 transition-all duration-300 ease-in-out">
-                E-Publish YaSiPiKan
+                YaSiPiKan
               </button>
             </a>
           </div>
