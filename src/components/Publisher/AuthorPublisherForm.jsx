@@ -7,6 +7,7 @@ import { FaSquarePhone } from 'react-icons/fa6';
 import { MdOutlineWork } from 'react-icons/md';
 import { GiWhiteBook } from 'react-icons/gi';
 import { SiPowerpages } from 'react-icons/si';
+import { Link } from 'react-router-dom';
 
 const FileUploadForm = () => {
     const [file, setFile] = useState(null);
@@ -37,7 +38,7 @@ const FileUploadForm = () => {
     
 
     const [error, setError] = useState(null);
-    const [successMessage, setSuccessMessage] = useState(null);
+    const [successMessage, setSuccessMessage] = useState(null); 
 
     const handleFileChange = (event) => {
         const selectedFile = event.target.files[0];
@@ -91,8 +92,22 @@ const FileUploadForm = () => {
             });
             setSuccessMessage(response.data.message);
             setFile(null);
+
+            setSuccessMessage('Data berhasil disubmit!');  // Set success message
+            setFile(null);  // Reset the file input
+
             setJudulBuku(''); // Reset the title input
-            setNamaPenulis(''); // Reset the author input
+            setNamaDepan(''); // Reset the author input
+            setNamaBelakang(''); // Reset the author input
+            setGelarBelakang('');
+            setGelarDepan('');
+            setJenisBuku('');
+            setLayananTerpilih('');
+            setAlamat('');
+            setJumlahCetak('');
+            setInstitusi('');
+            setUsia('');
+
         } catch (error) {
             setError('Error uploading file: ' + error.response?.data || 'Internal Server Error');
         }
@@ -102,6 +117,19 @@ const FileUploadForm = () => {
       <div className="flex justify-center items-center pt-10 pb-10 min-h-screen bg-gray-100">
       <Card className="w-full max-w-2xl p-6 shadow-lg">
         <h1 className="text-2xl font-bold mb-2 text-center">FORMULIR DAFTAR MENJADI PENULIS</h1>
+          {/* Conditional rendering of the success card */}
+          {successMessage ? (
+              <div className="p-6 bg-green-100 text-green-700 rounded-lg shadow-md">
+                  <h2 className="text-xl font-bold mb-2">Pendaftaran Berhasil!</h2>
+                  <p>{successMessage}</p>
+                  <p>Selamat, Anda telah berhasil mendaftar sebagai penulis di penerbit kami.</p>
+
+                  <Link to='/' className="text-white text-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
+                    KEMBALI KE BERANDA
+                  </Link>
+              </div>
+          ) : (
+              <>
 
         {/* <div className="p-10"> */}
             {/* <h1 className="text-3xl font-bold mb-4">Upload File Book</h1> */}
@@ -477,6 +505,8 @@ const FileUploadForm = () => {
                     DAFTAR
                 </button>
             </form>
+            </>
+            )}
         {/* </div> */}
         </Card>
       </div>
