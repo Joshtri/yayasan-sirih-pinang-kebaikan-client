@@ -36,7 +36,7 @@ const FileUploadForm = () => {
 
     // const [judulBuku,setJudulBuku]= useState('');
     
-
+    const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
     const [successMessage, setSuccessMessage] = useState(null); 
 
@@ -72,7 +72,9 @@ const FileUploadForm = () => {
 
 
     const handleSubmit = async (event) => {
-        event.preventDefault();
+      // event.preventDefault(); // Prevent default form submission
+      event.preventDefault();
+      setLoading(true); // Set loading to true when the form is submitted
 
         if (!file) {
             setError('Please select a file to upload.');
@@ -131,6 +133,8 @@ const FileUploadForm = () => {
         } catch (error) {
             setError('Error uploading file: ' + error.response?.data || 'Internal Server Error');
         }
+        setLoading(false); // Reset loading state after submission is complete
+
     };
 
     return (
@@ -528,8 +532,12 @@ const FileUploadForm = () => {
                 {error && <p className="text-red-500">{error}</p>}
                 {successMessage && <p className="text-green-500">{successMessage}</p>}
 
-                <button type="submit" className="bg-blue-600 w-full hover:bg-blue-700 text-white py-2 px-4 rounded">
-                    DAFTAR
+                <button 
+                    type="submit" 
+                    className={`bg-blue-600 w-full hover:bg-blue-700 text-white py-2 px-4 rounded ${loading ? 'opacity-50 cursor-not-allowed' : ''}`}
+                    disabled={loading} // Disable button when loading
+                >
+                    {loading ? 'Loading...' : 'DAFTAR'} {/* Show 'Processing...' when loading */}
                 </button>
             </form>
             </>
