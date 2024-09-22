@@ -107,7 +107,7 @@ const FileUploadForm = () => {
         formData.append('kesiapanNaskah', kesiapanNaskah);
 
         try {
-            const response = await axios.post('http://localhost:5000/api/v1/upload', formData, {
+            const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/api/v1/upload`, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                 },
