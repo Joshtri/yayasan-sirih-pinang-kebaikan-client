@@ -55,7 +55,7 @@ const ProgressBukuSection = () => {
     { stage: "Proses ke Perpusnas (Masuk ISBN)", date: "Belum Di Proses" },
     { stage: "Proses ke Perpusnas (Keluar ISBN)", date: "Belum Di Proses" },
     { stage: "Proses Produksi", date: "Belum Di Proses" },
-    { stage: "Pengiriman (Ekspedisi: JNE, No. Resi: 123456789)", date: "Belum Di Proses" }
+    { stage: "Pengiriman (Ekspedisi: -, No. Resi: -)", date: "Belum Di Proses" }
   ];
 
   return (
