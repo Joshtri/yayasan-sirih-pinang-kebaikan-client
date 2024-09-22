@@ -15,7 +15,7 @@ function PublisherAbout() {
                         <h1 className="text-3xl lg:text-5xl font-bold mb-4">Tentang Penerbit Buku</h1>
                         <h1 className="text-2xl lg:text-4xl font-bold mb-4 pt-3">Yayasan Sirih Pinang Kebaikan</h1>
                         <p className="text-lg lg:text-xl mb-6">
-                            Selamat datang di Yayasan Sirih Pinang Kebaikan. Kami berkomitmen untuk membantu penulis dan penerbit dalam proses penerbitan buku serta pembuatan ISBN yang resmi.
+                            Kami berkomitmen untuk membantu penulis dan penerbit dalam proses penerbitan buku serta pembuatan ISBN yang resmi.
                             Bersama kami, karya Anda akan terwujud dan tersebar luas untuk membawa kebaikan dan pengetahuan bagi semua.
                         </p>
                     </div>
