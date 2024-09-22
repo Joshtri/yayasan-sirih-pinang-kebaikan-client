@@ -59,6 +59,14 @@ const CustomNavbar = () => {
                   >
                     Cek Progres Buku
                   </Link>
+
+                  <Link
+                    to="/toko-online-buku"
+                    className="block px-4 py-2 text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+                    role="menuitem"
+                  >
+                    Toko Online Buku
+                  </Link>
                 </div>
               </div>
             )}

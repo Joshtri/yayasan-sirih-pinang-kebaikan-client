@@ -15,6 +15,7 @@ import ProgressCek from './pages/Service/ProgressCek'
 import ScrollToTop from './components/ScrollToUp'; // Import the ScrollToTop component
 import AboutPage from './pages/About/AboutPage'
 import ProgressSection from './pages/Service/ProgressSection'
+import TokoOnlinePage from './pages/TokoOnline/TokoOnlinePage'
 
 function App() {
   // const user = localStorage.getItem("token");
@@ -32,11 +33,13 @@ function App() {
 
           {/* Protected routes */}
           <Route path='/daftar-penulis-buku' element={<Publish/>}/>
+          <Route path='/toko-online-buku' element={<TokoOnlinePage/>}/>
           
           <Route path='/formulir-daftar' element={<FormAuthorPublish/>}/>
           <Route path='/cek-progress' element={<ProgressCek/>}/>
 
           <Route path='/section-cek-progress' element={<ProgressSection/>}/>
+
 
           {/* <Route path='/login' element={<LoginUser/>}/>
           <Route path='/sign-up' element={<SignUpUser/>}/> */}
