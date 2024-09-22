@@ -2,7 +2,7 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Card } from 'flowbite-react';
-import { FaEnvelope, FaPrint, FaUniversity, FaUser } from 'react-icons/fa';
+import { FaEnvelope, FaFile, FaPrint, FaUniversity, FaUser } from 'react-icons/fa';
 import { FaSquarePhone } from 'react-icons/fa6';
 import { MdOutlineWork } from 'react-icons/md';
 import { GiWhiteBook } from 'react-icons/gi';
@@ -48,16 +48,28 @@ const FileUploadForm = () => {
     }
     }, [successMessage]); // Runs only when successMessage is set
 
+    // const handleFileChange = (event) => {
+    //     const selectedFile = event.target.files[0];
+    //     if (selectedFile && selectedFile.type === 'application/pdf') {
+    //         setFile(selectedFile);
+    //         setError(null);
+    //     } else {
+    //         setError('Please upload a valid PDF file.');
+    //         setFile(null);
+    //     }
+    // };
+
     const handleFileChange = (event) => {
-        const selectedFile = event.target.files[0];
-        if (selectedFile && selectedFile.type === 'application/pdf') {
-            setFile(selectedFile);
-            setError(null);
-        } else {
-            setError('Please upload a valid PDF file.');
-            setFile(null);
-        }
+      const selectedFile = event.target.files[0];
+      if (selectedFile && (selectedFile.type === 'application/pdf' || selectedFile.type === 'application/vnd.openxmlformats-officedocument.wordprocessingml.document')) {
+          setFile(selectedFile);
+          setError(null);
+      } else {
+          setError('Please upload a valid PDF or DOCX file.');
+          setFile(null);
+      }
     };
+
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -88,7 +100,7 @@ const FileUploadForm = () => {
         formData.append('jumlahHalaman', jumlahHalaman);
         formData.append('jumlahCetak', jumlahCetak);
         formData.append('pernahDiterbitkan', pernahDiterbitkan);
-        formData.append('komunikasiDenganKonsultan', komunikasiDenganKonsultan);
+        // formData.append('komunikasiDenganKonsultan', komunikasiDenganKonsultan);
         formData.append('jenisBuku', jenisBuku);
         formData.append('kesiapanNaskah', kesiapanNaskah);
 
@@ -142,33 +154,33 @@ const FileUploadForm = () => {
         {/* <div className="p-10"> */}
             {/* <h1 className="text-3xl font-bold mb-4">Upload File Book</h1> */}
             <form onSubmit={handleSubmit}>
-                <div className="mb-4">
+                <div className="mb-5">
 
 
                 <div className='flex flex-col'>
                     <label className="mb-1 flex items-center">
-                      <FaUser className="mr-2 text-blue-800" /> Nama Depan
+                      <FaUser className="mr-2 text-blue-800" /> Nama Depan <span className='text-red-500'>*</span>
                     </label>
                     <input 
                       type="text" 
                       placeholder="Nama Depan" 
                       value={namaDepan}
                       onChange={(e) => setNamaDepan(e.target.value)}
-                      className="border rounded p-2 mb-2"
+                      className="border rounded p-2 mb-5"
                       required
                     />
                 </div>
 
                 <div className='flex flex-col'>
                     <label className="mb-1 flex items-center">
-                      <FaUser className="mr-2 text-blue-800" /> Nama Belakang
+                      <FaUser className="mr-2 text-blue-800" /> Nama Belakang <span className='text-red-500'>*</span>
                     </label>
                     <input 
                       type="text" 
                       placeholder="Nama Depan" 
                       value={namaBelakang}
                       onChange={(e) => setNamaBelakang(e.target.value)}
-                      className="border rounded p-2 mb-2"
+                      className="border rounded p-2 mb-5"
                       required
                     />
                 </div>
@@ -183,7 +195,7 @@ const FileUploadForm = () => {
                       placeholder="Masukkan Gelar Depan jika ada" 
                       value={gelarDepan}
                       onChange={(e) => setGelarDepan(e.target.value)}
-                      className="border rounded p-2 mb-2"
+                      className="border rounded p-2 mb-5"
                       
                     />
                 </div>
@@ -196,19 +208,19 @@ const FileUploadForm = () => {
                       placeholder="Masukkan Gelar Belakang jika ada" 
                       value={gelarBelakang}
                       onChange={(e) => setGelarBelakang(e.target.value)}
-                      className="border rounded p-2 mb-2"
+                      className="border rounded p-2 mb-5"
                       
                     />
                 </div>
 
                 <div className='flex flex-col'>
                   <label className="mb-1 flex items-center">
-                    <FaUser className="mr-2 text-blue-800" /> Jenis Kelamin
+                    <FaUser className="mr-2 text-blue-800" /> Jenis Kelamin <span className='text-red-500'>*</span>
                   </label>
                   <select 
                     value={jenisKelamin} 
                     onChange={(e) => setJenisKelamin(e.target.value)}
-                    className="border rounded p-2 mb-2"
+                    className="border rounded p-2 mb-5"
                     required
                   >
                     <option value="" disabled>Pilih Jenis Kelamin</option>
@@ -220,42 +232,42 @@ const FileUploadForm = () => {
 
                 <div className='flex flex-col'>
                     <label className="mb-1 flex items-center">
-                      <FaSquarePhone   className="mr-2 text-blue-800" /> No Telepon
+                      <FaSquarePhone   className="mr-2 text-blue-800" /> No Telepon <span className='text-red-500'>*</span>
                     </label>
                     <input 
-                      type="text" 
+                      type="number" 
                       placeholder="Nomor Telepon" 
                       value={nomorTelepon}
                       onChange={(e) => setNomorTelepon(e.target.value)}
-                      className="border rounded p-2 mb-2"
+                      className="border rounded p-2 mb-5"
                       required
                     />
                 </div>
                 <div className='flex flex-col'>
                     <label className="mb-1 flex items-center">
-                    <FaEnvelope className="mr-2 text-blue-800" /> Email
+                    <FaEnvelope className="mr-2 text-blue-800" /> Email <span className='text-red-500'>*</span>
                     </label>
                     <input 
                       type="email" 
                       placeholder="E-Mail" 
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
-                      className="border rounded p-2 mb-2"
+                      className="border rounded p-2 mb-5"
                       required
                     />
                 </div>
 
                 <div className='flex flex-col'>
                   <label className="mb-1 flex items-center">
-                    <FaUser className="mr-2 text-blue-800" /> Usia
+                    <FaUser className="mr-2 text-blue-800" /> Usia <span className='text-red-500'>*</span>
                   </label>
                   <select
                     value={usia}
                     onChange={(e) => setUsia(e.target.value)}
-                    className="border rounded p-2 mb-2"
+                    className="border rounded p-2 mb-5"
                     required
                   >
-                    <option value="" disabled>Pilih Salah Satu</option>
+                    <option value="" disabled>Pilih Salah Satu</option> 
                     <option value="18-24">18–24</option>
                     <option value="25-34">25–34</option>
                     <option value="35-44">35–44</option>
@@ -269,27 +281,27 @@ const FileUploadForm = () => {
                
                 <div className='flex flex-col'>
                     <label className="mb-1 flex items-center">
-                      <FaUniversity className="mr-2 text-blue-800" /> Institusi
+                      <FaUniversity className="mr-2 text-blue-800" /> Institusi <span className='text-red-500'>*</span>
                     </label>
                     <input 
                       type="text" 
                       placeholder="Institusi" 
                       value={institusi}
                       onChange={(e) => setInstitusi(e.target.value)}
-                      className="border rounded p-2 mb-2"
+                      className="border rounded p-2 mb-5"
                       required
                     />
                 </div>
                 <div className='flex flex-col'>
                     <label className="mb-1 flex items-center">
-                      <FaUser className="mr-2 text-blue-800" /> Alamat
+                      <FaUser className="mr-2 text-blue-800" /> Alamat <span className='text-red-500'>*</span>
                     </label>
                     <input 
                       type="text" 
                       placeholder="Alamat" 
                       value={alamat}
                       onChange={(e) => setAlamat(e.target.value)}
-                      className="border rounded p-2 mb-2"
+                      className="border rounded p-2 mb-5"
                       required
                     />
                 </div>
@@ -298,12 +310,12 @@ const FileUploadForm = () => {
 
                 <div className='flex flex-col'>
                   <label className="mb-1 flex items-center">
-                    <MdOutlineWork className="mr-2 text-blue-800" /> Pekerjaan
+                    <MdOutlineWork className="mr-2 text-blue-800" /> Pekerjaan <span className='text-red-500'>*</span>
                   </label>
                   <select
                     value={pekerjaan}
                     onChange={(e) => setPekerjaan(e.target.value)}
-                    className="border rounded p-2 mb-2"
+                    className="border rounded p-2 mb-5"
                     required
                   >
                     <option value="" disabled>Pilih Salah Satu</option>
@@ -331,23 +343,23 @@ const FileUploadForm = () => {
                     </label>
                     <input 
                       type="text" 
-                      placeholder="Lainnya" 
+                      placeholder="Apabila ada jenis pekerjaan lainnya" 
                       value={pekerjaanLain}
                       onChange={(e) => setpekerjaanLain(e.target.value)}
-                      className="border rounded p-2 mb-2"
-                      required
+                      className="border rounded p-2 mb-5"
+                      
                     />
                 </div>
 
 
                 <div className='flex flex-col'>
                   <label className="mb-1 flex items-center">
-                    <FaUser className="mr-2 text-blue-800" /> Layanan Terpilih
+                    <FaUser className="mr-2 text-blue-800" /> Layanan Terpilih <span className='text-red-500'>*</span>
                   </label>
                   <select
                     value={layananTerpilih}
                     onChange={(e) => setLayananTerpilih(e.target.value)}
-                    className="border rounded p-2 mb-2"
+                    className="border rounded p-2 mb-5"
                     required
                   >
                     <option value="" disabled>Pilih Salah Satu</option>
@@ -359,36 +371,43 @@ const FileUploadForm = () => {
 
                 <div className='flex flex-col'>
                   <label className="mb-1 flex items-center">
-                    <FaUser className="mr-2 text-blue-800" /> Judul Buku
+                    <FaUser className="mr-2 text-blue-800" /> Judul Buku <span className='text-red-500'>*</span>
                   </label>
                   <input
                       type="text" 
                       placeholder="Judul Buku" 
                       value={judulBuku}
                       onChange={(e) => setJudulBuku(e.target.value)}
-                      className="border rounded p-2 mb-2"
+                      className="border rounded p-2 mb-5"
                       required
                     />
                 </div>
 
 
-                <input 
-                    type="file" 
-                    accept="application/pdf" 
-                    onChange={handleFileChange} 
-                    className="border rounded p-2"
-                    required
-                />
+                <div className='flex flex-col'>
+                  <label className="mb-1 flex items-center">
+                    <FaFile className="mr-2 text-blue-800" /> Upload File Buku (format .pdf/.docx) <span className='text-red-500'>*</span>
+                  </label>
+                    <input 
+                        type="file" 
+                        // accept="application/pdf"
+                        accept=".pdf, .docx"  // Allow both PDF and DOCX file types
+
+                        onChange={handleFileChange} 
+                        className="border rounded p-2"
+                        required
+                    />
+                </div>
                 
 
                 <div className='flex flex-col'>
                   <label className="mb-1 flex items-center">
-                    <GiWhiteBook className="mr-2 text-blue-800" /> Ukuran Buku
+                    <GiWhiteBook className="mr-2 text-blue-800" /> Ukuran Buku <span className='text-red-500'>*</span>
                   </label>
                   <select
                     value={ukuranBuku}
                     onChange={(e) => setUkuranBuku(e.target.value)}
-                    className="border rounded p-2 mb-2"
+                    className="border rounded p-2 mb-5"
                     required
                   >
                     <option value="" disabled>Pilih Salah Satu</option>
@@ -401,14 +420,14 @@ const FileUploadForm = () => {
 
                 <div className='flex flex-col'>
                   <label className="mb-1 flex items-center">
-                    <SiPowerpages  className="mr-2 text-blue-800" /> Jumlah Halaman
+                    <SiPowerpages  className="mr-2 text-blue-800" /> Jumlah Halaman <span className='text-red-500'>*</span>
                   </label>
                   <input
                       type="number" 
-                      placeholder="Ukuran Buku" 
+                      placeholder="Jumlah Halaman dari buku anda" 
                       value={jumlahHalaman}
                       onChange={(e) => setJumlahHalaman(e.target.value)}
-                      className="border rounded p-2 mb-2"
+                      className="border rounded p-2 mb-5"
                       min="0" // Ensure value cannot be less than 0
 
                       required
@@ -418,62 +437,62 @@ const FileUploadForm = () => {
 
                 <div className='flex flex-col'>
                   <label className="mb-1 flex items-center">
-                    <FaPrint className="mr-2 text-blue-800" /> Jumlah Cetak
+                    <FaPrint className="mr-2 text-blue-800" /> Jumlah Cetak <span className='text-red-500'>*</span>
                   </label>
                   <input
                       type="number" 
                       placeholder="Jumlah Cetak Buku" 
                       value={jumlahCetak}
                       onChange={(e) => setJumlahCetak(e.target.value)}
-                      className="border rounded p-2 mb-2"
+                      className="border rounded p-2 mb-5"
                       required
                       min="0" // Ensure value cannot be less than 0
 
                     />
                 </div>
 
-                <div className='flex flex-col'>
+                {/* <div className='flex flex-col'>
                   <label className="mb-1 flex items-center">
-                    <FaUser className="mr-2 text-blue-800" /> Pernah Diterbitkan
+                    <FaUser className="mr-2 text-blue-800" /> Pernah Diterbitkan <span className='text-red-500'>*</span>
                   </label>
                   <input
                       type="text" 
                       placeholder="Jumlah Cetak Buku" 
                       value={pernahDiterbitkan}
                       onChange={(e) => setPernahDiterbitkan(e.target.value)}
-                      className="border rounded p-2 mb-2"
+                      className="border rounded p-2 mb-5"
                       required
                     />
-                </div>
+                </div> */}
 
 
                 <div className='flex flex-col'>
                   <label className="mb-1 flex items-center">
-                    <FaUser className="mr-2 text-blue-800" /> Apakah Anda sudah pernah menerbitkan buku atau berkomunikasi dengan konsultan di Penerbit Yayasan Sirih Pinang Kebaikan?
+                    <FaUser className="mr-2 text-blue-800" /> Apakah Anda sudah pernah menerbitkan buku atau berkomunikasi dengan konsultan di Penerbit Yayasan Sirih Pinang Kebaikan? <span className='text-red-500'>*</span>
                   </label>
                   <select
-                    value={komunikasiDenganKonsultan}
-                    onChange={(e) => setKomunikasiDenganKonsultan(e.target.value)}
-                    className="border rounded p-2 mb-2"
+                    value={pernahDiterbitkan}
+                    onChange={(e) => setPernahDiterbitkan(e.target.value)}
+                    className="border rounded p-2 mb-5"
                     required
                   >
                     <option value="" disabled>Pilih Salah Satu</option>
-                    <option value="Sudah, pernah menerbitkan buku di deepublish">Sudah, pernah menerbitkan buku di </option>
-                    <option value="Belum, pernah menerbitkan buku di deepublish">Belum, pernah menerbitkan buku di deepublish</option>
-                    <option value="Sudah, pernah berkomunikasi dengan konsultan Deepublish">Sudah, pernah berkomunikasi dengan konsultan Deepublish</option>
-                    <option value="Belum, pernah berkomunikasi dengan konsultan Deepublish">Belum, pernah berkomunikasi dengan konsultan Deepublish</option>
+                    <option value="Sudah, pernah menerbitkan buku di Yayasan Sirih Pinang Kebaikan">Sudah, pernah menerbitkan buku di Yayasan Sirih Pinang Kebaikan </option>
+                    <option value="Belum, pernah menerbitkan buku di Yayasan Sirih Pinang Kebaikan">Belum, pernah menerbitkan buku di Yayasan Sirih Pinang Kebaikan</option>
+                    <option value="Sudah, pernah berkomunikasi dengan konsultan Yayasan Sirih Pinang Kebaikan">Sudah, pernah berkomunikasi dengan konsultan Yayasan Sirih Pinang Kebaikan</option>
+                    <option value="Belum, pernah berkomunikasi dengan konsultan Yayasan Sirih Pinang Kebaikan ">Belum, pernah berkomunikasi dengan konsultan Yayasan Sirih Pinang Kebaikan</option>
                   </select>
                 </div>
 
 
                 <div className='flex flex-col'>
                   <label className="mb-1 flex items-center">
-                    <FaUser className="mr-2 text-blue-800" /> Jenis Buku
+                    <FaUser className="mr-2 text-blue-800" /> Jenis Buku <span className='text-red-500'>*</span>
                   </label>
                   <select
                     value={jenisBuku}
                     onChange={(e) => setJenisBuku(e.target.value)}
-                    className="border rounded p-2 mb-2"
+                    className="border rounded p-2 mb-5"
                     required
                   >
                     <option value="" disabled>Pilih Salah Satu</option>
@@ -485,12 +504,12 @@ const FileUploadForm = () => {
 
                 <div className='flex flex-col'>
                   <label className="mb-1 flex items-center">
-                    <FaUser className="mr-2 text-blue-800" /> Kesiapan Naskah
+                    <FaUser className="mr-2 text-blue-800" /> Kesiapan Naskah <span className='text-red-500'>*</span>
                   </label>
                   <select
                     value={kesiapanNaskah}
                     onChange={(e) => setKesiapanNaskah(e.target.value)}
-                    className="border rounded p-2 mb-2"
+                    className="border rounded p-2 mb-5"
                     required
                   >
                     <option value="" disabled>Pilih Salah Satu</option>
