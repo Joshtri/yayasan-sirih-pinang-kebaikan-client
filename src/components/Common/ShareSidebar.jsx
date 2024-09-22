@@ -4,8 +4,8 @@ import { FaSquareXTwitter } from 'react-icons/fa6';
 
 function ShareSidebar() {
   const [isOpen, setIsOpen] = useState(false); // State to toggle sidebar on mobile
-  const shareUrl = 'https://yourwebsite.com'; // Replace with your website URL
-  const shareText = 'Check out this awesome content!'; // Replace with your share text
+  const shareUrl = 'https://yayasan-sirih-pinang-kebaikan.com'; // Replace with your website URL
+  const shareText = 'ingin menerbitkan buku anda ? Silahkan mengunjungi Yayasan Sirih Pinang Kebaikan!'; // Replace with your share text
 
   // Toggle sidebar visibility on mobile
   const toggleSidebar = () => {

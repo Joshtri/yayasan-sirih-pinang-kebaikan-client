@@ -61,7 +61,7 @@ const Footer = () => {
                             <FaInstagram />
                         </a>
                         <a
-                            href="https://facebook.com/yourpage"
+                            href="#"
                             target="_blank"
                             rel="noopener noreferrer"
                             className="text-white hover:text-gray-300"
