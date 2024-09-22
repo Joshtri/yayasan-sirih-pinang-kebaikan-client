@@ -11,7 +11,7 @@ import { Link } from 'react-router-dom';
 
 const FileUploadForm = () => {
     const [file, setFile] = useState(null);
-    const [namaPenulis, setNamaPenulis] = useState('');
+    // const [namaPenulis, setNamaPenulis] = useState('');
     const [namaDepan, setNamaDepan] = useState('');
     const [namaBelakang, setNamaBelakang] = useState('');
     const [gelarDepan, setGelarDepan] = useState('');
@@ -30,7 +30,7 @@ const FileUploadForm = () => {
     const [jumlahHalaman, setJumlahHalaman] = useState('');
     const [jumlahCetak, setJumlahCetak]= useState('');
     const [pernahDiterbitkan, setPernahDiterbitkan]= useState('');
-    const [komunikasiDenganKonsultan, setKomunikasiDenganKonsultan] = useState('');
+    // const [komunikasiDenganKonsultan, setKomunikasiDenganKonsultan] = useState('');
     const [jenisBuku, setJenisBuku] = useState('');
     const [kesiapanNaskah, setKesiapanNaskah] = useState('');
 
