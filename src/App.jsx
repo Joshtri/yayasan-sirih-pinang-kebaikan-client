@@ -16,6 +16,8 @@ import ScrollToTop from './components/ScrollToUp'; // Import the ScrollToTop com
 import AboutPage from './pages/About/AboutPage'
 import ProgressSection from './pages/Service/ProgressSection'
 import TokoOnlinePage from './pages/TokoOnline/TokoOnlinePage'
+import VisiMisiPage from './pages/About/VisiMisiPage'
+import SejarahPage from './pages/About/SejarahPage'
 
 function App() {
   // const user = localStorage.getItem("token");
@@ -29,6 +31,8 @@ function App() {
           <Route path='/' element={<Home/>} />
           <Route path='/contact' element={<Contact/>} />
           <Route path='/about' element={<AboutPage/>} />
+          <Route path='/visi-misi' element={<VisiMisiPage/>} />
+          <Route path='/sejarah' element={<SejarahPage/>} />
 
 
           {/* Protected routes */}

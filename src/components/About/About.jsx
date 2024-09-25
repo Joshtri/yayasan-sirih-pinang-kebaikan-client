@@ -33,6 +33,10 @@ function About() {
               <p className="leading-relaxed text-lg text-gray-800">
                 Yayasan Sirih Pinang Kebaikan, disingkat YaSiPiKan, adalah sebuah yayasan yang bergerak di bidang kemanusiaan, percetakan, pendidikan, dan religi. Yayasan ini bertujuan untuk membangun gereja dan negara dengan menebarkan kebaikan Allah melalui berbagai program yang ditawarkan.
               </p>
+              
+              <p className='leading-relaxed text-lg mt-4 text-gray-800'>
+              Sirih Pinang Kebaikan merupakan nama yayasan yang dibentuk di Kupang – Ibukota Provinsi Nusa Tenggara Timur, <strong> tanggal 22 Desember 2023, sesuai tanggal terbitnya akta notaris </strong>. Dalam profil singkat ini sebutan bagi Yayasan Sirih Pinag Kebaikan akan diperpendek menjadi SiPiKan.
+              </p>
             </div>
           </div>
         </Card>

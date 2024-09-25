@@ -24,6 +24,8 @@ const CustomNavbar = () => {
         <Navbar.Collapse className={`md:flex ${isOpen ? 'block' : 'hidden'}`}>
           <Link to="/" className="text-white text-lg px-3 py-2 hover:bg-blue-800 rounded">Home</Link>
           <Link to="/about" className="text-white text-lg px-3 py-2 hover:bg-blue-800 rounded">About</Link>
+          <Link to="/sejarah" className="text-white text-lg px-3 py-2 hover:bg-blue-800 rounded">Sejarah</Link>
+          <Link to="/visi-misi" className="text-white text-lg px-3 py-2 hover:bg-blue-800 rounded">Visi Misi</Link>
 
           {/* Service Dropdown */}
           <div className="relative inline-block text-left">
