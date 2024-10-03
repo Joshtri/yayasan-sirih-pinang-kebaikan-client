@@ -8,7 +8,7 @@ function CekProgressDescription() {
         <h1 className="text-2xl font-bold mb-4">Cek Progres Penerbitan Buku Anda</h1>
         <hr />
         <p className="mb-0">
-          Selamat! Anda sudah berada di jalur yang tepat untuk menerbitkan buku impian Anda bersama Penerbit Deepublish. Kami sangat senang bisa membantu mewujudkan karya Anda.
+          Selamat! Anda sudah berada di jalur yang tepat untuk menerbitkan buku impian Anda bersama Penerbit Yayasan Sirih Pinang Kebaikan. Kami sangat senang bisa membantu mewujudkan karya Anda.
         </p>
         <p className="mb-0">
           Di sini, Anda dapat dengan mudah mengecek setiap tahapan perjalanan naskah Anda, mulai dari penerimaan hingga produksi. Jangan lewatkan momen penting dalam proses penerbitan buku Anda.
