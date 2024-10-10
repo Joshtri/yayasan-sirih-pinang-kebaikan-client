@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Header Example</title>
+    <script src="https://cdn.jsdelivr.net/npm/flowbite@1.5.1/dist/flowbite.bundle.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.0.0/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body>
+
+<!-- Header -->
+<nav class="bg-white shadow-md">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex justify-between h-16">
+      <div class="flex-shrink-0 flex items-center">
+        <!-- Logo -->
+        <img src="your-logo-url.png" alt="Logo" class="h-10 w-auto">
+        <span class="ml-3 font-bold text-lg">deepublish store</span>
+      </div>
+      <!-- Menu Links -->
+      <div class="hidden md:flex space-x-6 items-center">
+        <div class="relative group">
+          <button class="text-gray-700 font-medium">KATEGORI</button>
+          <!-- Dropdown menu -->
+          <div class="absolute hidden group-hover:block bg-white shadow-md mt-2 p-2">
+            <a href="#" class="block px-4 py-2 text-sm text-gray-700">Subkategori 1</a>
+            <a href="#" class="block px-4 py-2 text-sm text-gray-700">Subkategori 2</a>
+          </div>
+        </div>
+        <div class="relative group">
+          <button class="text-gray-700 font-medium">PENGHASILAN TAMBAHAN</button>
+          <div class="absolute hidden group-hover:block bg-white shadow-md mt-2 p-2">
+            <a href="#" class="block px-4 py-2 text-sm text-gray-700">Penghasilan 1</a>
+            <a href="#" class="block px-4 py-2 text-sm text-gray-700">Penghasilan 2</a>
+          </div>
+        </div>
+        <a href="#" class="text-gray-700 font-medium">PROMO</a>
+        <a href="#" class="text-gray-700 font-medium">PENERBITAN</a>
+        <a href="#" class="text-gray-700 font-medium">PEMBELIAN BUKU</a>
+        <a href="#" class="text-gray-700 font-medium">BLOG</a>
+        <a href="#" class="text-gray-700 font-medium">EBOOK RESELLER</a>
+        <a href="#" class="text-gray-700 font-medium">CEK RESI</a>
+      </div>
+
+      <!-- Search, cart, and profile icons -->
+      <div class="flex items-center space-x-4">
+        <a href="#" class="text-gray-700">
+          <!-- Search icon -->
+          <svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M11 19a8 8 0 100-16 8 8 0 000 16zM21 21l-4.35-4.35"></path>
+          </svg>
+        </a>
+        <a href="#" class="text-gray-700 relative">
+          <!-- Cart icon -->
+          <svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L6 9m1 4l-1 5m1-5h10m0 0l1 5m0-5L18 9m-5-6h4M7 4h4"></path>
+          </svg>
+          <!-- Cart counter -->
+          <span class="absolute top-0 right-0 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-red-100 bg-red-600 rounded-full">0</span>
+        </a>
+        <a href="#" class="text-gray-700">
+          <!-- User icon -->
+          <svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M5.121 19.364a9 9 0 1113.757 0M12 13a4 4 0 100-8 4 4 0 000 8z"></path>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+</body>
+</html>

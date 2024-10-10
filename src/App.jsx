@@ -18,6 +18,8 @@ import ProgressSection from './pages/Service/ProgressSection'
 import TokoOnlinePage from './pages/TokoOnline/TokoOnlinePage'
 import VisiMisiPage from './pages/About/VisiMisiPage'
 import SejarahPage from './pages/About/SejarahPage'
+import BerandaBookShop from './pages/TokoOnline/BerandaBookShop'
+import DetailBookPage from './pages/TokoOnline/DetailBookPage'
 
 function App() {
   // const user = localStorage.getItem("token");
@@ -43,6 +45,10 @@ function App() {
           <Route path='/cek-progress' element={<ProgressCek/>}/>
 
           <Route path='/section-cek-progress' element={<ProgressSection/>}/>
+
+
+          <Route path='/toko-buku' element={<BerandaBookShop/>}/>
+          <Route path='/produk-buku' element={<DetailBookPage/>}/>
 
 
           {/* <Route path='/login' element={<LoginUser/>}/>
