@@ -3,15 +3,17 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 
 // Function untuk menampilkan kartu produk
-function ProductCard({ id,title, price, imageUrl }) {
+// Function untuk menampilkan kartu produk
+function ProductCard({ id, title, price, imageUrl }) {
   return (
     <div className="bg-white p-4 rounded-lg shadow-md">
-      <img
-        src={imageUrl}
-        alt={`Cover of ${title}`}
-        className="w-full h-72 object-cover mb-4 rounded-lg"
-      />
-
+      <div className="aspect-w-1 aspect-h-1 mb-4">
+        <img
+          src={imageUrl}
+          alt={`Cover of ${title}`}
+          className="w-full h-full object-cover rounded-lg"
+        />
+      </div>
       <h3 className="text-sm font-semibold">{title}</h3>
       <p className="text-purple-600 font-bold mt-2">{price}</p>
       <Link to={`/produk-buku/${id}`} className="text-blue-500 underline mt-2 block">
@@ -20,6 +22,8 @@ function ProductCard({ id,title, price, imageUrl }) {
     </div>
   );
 }
+
+
 
 // Function untuk menampilkan skeleton loading
 function SkeletonCard() {
