@@ -48,7 +48,7 @@ function App() {
 
 
           <Route path='/toko-buku' element={<BerandaBookShop/>}/>
-          <Route path='/produk-buku' element={<DetailBookPage/>}/>
+          <Route path='/produk-buku/:id' element={<DetailBookPage/>}/>
 
 
           {/* <Route path='/login' element={<LoginUser/>}/>

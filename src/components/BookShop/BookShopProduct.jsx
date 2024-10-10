@@ -1,94 +1,95 @@
-import React from 'react';
-
-// Daftar produk
-const products = [
-  {
-    id: 1,
-    title: 'Buku Belajar Microsoft Office 2019 (Word, Excel, P...)',
-    price: 'Rp 108.000',
-    imageUrl: 'https://placehold.co/150x200',
-  },
-  {
-    id: 2,
-    title: 'Buku Balanced Scorecard Teori Dan Aplikasi',
-    price: 'Rp 99.000',
-    imageUrl: 'https://placehold.co/150x200',
-  },
-  {
-    id: 3,
-    title: 'Buku Edukasi Gizi Remaja',
-    price: 'Rp 94.000',
-    imageUrl: 'https://placehold.co/150x200',
-  },
-  {
-    id: 4,
-    title: 'Buku Dasar-Dasar Teknik Informatika',
-    price: 'Rp 86.000',
-    imageUrl: 'https://placehold.co/150x200',
-  },
-  {
-    id: 5,
-    title: 'Buku Paket Lengkap Menguasai Animasi 2D',
-    price: 'Rp 80.000',
-    imageUrl: 'https://placehold.co/150x200',
-  },
-  {
-    id: 6,
-    title: 'Buku Gizi Dalam Kesehatan Reproduksi',
-    price: 'Rp 80.000',
-    imageUrl: 'https://placehold.co/150x200',
-  },
-];
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 // Function untuk menampilkan kartu produk
-function ProductCard({ title, price, imageUrl }) {
+function ProductCard({ id,title, price, imageUrl }) {
   return (
     <div className="bg-white p-4 rounded-lg shadow-md">
       <img
         src={imageUrl}
         alt={`Cover of ${title}`}
-        className="w-full h-48 object-cover mb-4 rounded-lg"
+        className="w-full h-72 object-cover mb-4 rounded-lg"
       />
-      <span className="bg-purple-200 text-purple-600 text-xs font-semibold py-1 px-2 rounded-full inline-block mb-2">
-        Best Seller
-      </span>
+
       <h3 className="text-sm font-semibold">{title}</h3>
       <p className="text-purple-600 font-bold mt-2">{price}</p>
+      <Link to={`/produk-buku/${id}`} className="text-blue-500 underline mt-2 block">
+        Lihat Detail
+      </Link>
+    </div>
+  );
+}
+
+// Function untuk menampilkan skeleton loading
+function SkeletonCard() {
+  return (
+    <div className="bg-white p-4 rounded-lg shadow-md animate-pulse">
+      <div className="w-full h-48 bg-gray-300 rounded mb-4"></div>
+      <div className="h-4 bg-gray-300 rounded mb-2 w-3/4"></div>
+      <div className="h-4 bg-gray-300 rounded mb-2 w-1/2"></div>
     </div>
   );
 }
 
 function BookShopProduct() {
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const url = `${import.meta.env.VITE_BASE_URL}/api/v1/books`;
+        const response = await axios.get(url);
+        setProducts(response.data.data); // Assuming the API returns data in 'data' key
+      } catch (err) {
+        setError('Terjadi kesalahan saat mengambil data produk.');
+      } finally {
+        setLoading(false);
+      }
+    };
+    
+    fetchProducts();
+  }, []);
+
+  if (error) return <div className="text-center text-red-500">{error}</div>;
+
   return (
-    <div className="container mx-auto p-4">
+    <div className="container mx-auto p-4 pb-20 pt-20">
       {/* Section Atas dengan Card Besar */}
       <div className="bg-purple-700 text-white text-center p-8 rounded-lg mb-8">
         <h1 className="text-3xl font-bold">YaSiPikan Store</h1>
         <p className="mt-2">Toko buku yang menyediakan referensi buku kuliah di Indonesia.</p>
-        <button className="mt-4 bg-white text-purple-700 font-semibold py-2 px-4 rounded-full">Belanja sekarang</button>
+        <button className="mt-4 bg-white text-purple-700 font-semibold py-2 px-4 rounded-full">
+          Belanja sekarang
+        </button>
       </div>
 
       {/* Bagian Produk Terlaris */}
       <div className="bg-white p-6 rounded-lg shadow-md">
         <div className="flex items-center mb-4">
-          <h2 className="text-xl font-bold text-purple-700">PALING LARIS</h2>
-          <span className="ml-2 bg-purple-600 text-white text-xs font-semibold py-1 px-2 rounded">BEST SELLER</span>
-        </div>
-        <p className="mb-4">
-          Belanja dengan kode <span className="font-bold">"SUKIRMAN"</span> dan
-          dapatkan gratis ongkir s/d Rp10.000
-        </p>
+          <h2 className="text-xl font-bold text-purple-700">BUKU TERBARU</h2>
 
-        {/* Grid Produk */}
+        </div>
+
+        {/* Grid Produk atau Skeleton */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-          {products.map((product) => (
-            <ProductCard
-              key={product.id}
-              title={product.title}
-              price={product.price}
-              imageUrl={product.imageUrl}
-            />
-          ))}
+          {loading
+            ? // Tampilkan skeleton card saat loading
+              Array.from({ length: 6 }).map((_, index) => (
+                <SkeletonCard key={index} />
+              ))
+            : // Tampilkan data produk setelah selesai loading
+              products.map((product) => (
+                <ProductCard
+                  key={product._id}
+                  title={product.judul} // Assuming the book has a 'judul' field
+                  price={`Rp ${product.harga}`} // Assuming the book has a 'harga' field
+                  id={product._id}
+                  imageUrl={product.coverUrl || 'https://placehold.co/150x200'} // Default image if no coverUrl is provided
+                />
+              ))}
         </div>
       </div>
 

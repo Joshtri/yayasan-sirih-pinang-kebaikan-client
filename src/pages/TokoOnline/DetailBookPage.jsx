@@ -9,8 +9,8 @@ function DetailBookPage() {
         <DetailBookProduct/>
 
 
-        <ProdukTerkait/>
-        <div>DetailBookPage</div>
+        {/* <ProdukTerkait/> */}
+        {/* <div>DetailBookPage</div> */}
 
     </LayoutShopBook>
   )

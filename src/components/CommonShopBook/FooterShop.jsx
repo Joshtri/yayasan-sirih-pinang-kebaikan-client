@@ -2,7 +2,7 @@
 
 const FooterShop = () => {
   return (
-    <div className="p-8 bg-black text-white">
+    <div className="p-10 bg-black text-white">
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
         <div>
           <div className="flex items-center mb-4">
@@ -16,9 +16,8 @@ const FooterShop = () => {
             <i className="fab fa-youtube bg-gray-800 p-2 rounded-full"></i>
             <i className="fab fa-twitter bg-gray-800 p-2 rounded-full"></i>
             <i className="fab fa-instagram bg-gray-800 p-2 rounded-full"></i>
-            <i className="fab fa-spotify bg-gray-800 p-2 rounded-full"></i>
           </div>
-          <p className="mb-4">© 2024 All Right Reserved. Toko Buku Deepublish – CV. Budi Utama</p>
+          <p className="mb-4">© 2024 All Right Reserved. Toko Buku Yayasan Sirih Pinang Kebaikan</p>
           <h2 className="text-orange-500 mb-2">Jam Pelayanan</h2>
           <p>Senin - Jumat pukul 08.00 - 17.00 WIB<br />(Pesan Sabtu/Minggu akan diproses Hari Senin)</p>
         </div>
@@ -29,16 +28,16 @@ const FooterShop = () => {
             <li>Instansi</li>
           </ul>
           <h2 className="text-orange-500 mb-2">Alamat</h2>
-          <p className="mb-4">Jl.Rajawali G. Elang 6 No 3 RT/RW 005/033, Drono, Sardonoharjo, Ngaglik, Sleman, D.I Yogyakarta 55581</p>
+          <p className="mb-4">Jl. El Tari No. 23, Kel. Oebobo, Kec. Oebobo</p>
           <h2 className="text-orange-500 mb-2">Kontak Kami</h2>
           <ul className="mb-4">
-            <li><i className="fab fa-whatsapp"></i> CS Deepublish (0274) 4533427 (Telp)</li>
-            <li><i className="fab fa-whatsapp"></i> CS Pembelian Retail : 081-1286-3655 (WA)</li>
+            <li><i className="fab fa-whatsapp"></i> CS </li>
+            {/* <li><i className="fab fa-whatsapp"></i> CS Pembelian Retail : 081-1286-3655 (WA)</li>
             <li><i className="fab fa-whatsapp"></i> CS Marketplace : 0811-2845-901 (WA)</li>
             <li><i className="fab fa-whatsapp"></i> CS Reseller 1 : 0858-7818-8344 (WA)</li>
             <li><i className="fab fa-whatsapp"></i> CS Reseller 2 : 081-1286-3654 (WA)</li>
             <li><i className="fab fa-whatsapp"></i> CS Pengadaan Buku 1: 0812-8630-4188 (WA)</li>
-            <li><i className="fab fa-whatsapp"></i> CS Pengadaan Buku 2: 0811-2868-743 (WA)</li>
+            <li><i className="fab fa-whatsapp"></i> CS Pengadaan Buku 2: 0811-2868-743 (WA)</li> */}
           </ul>
         </div>
         <div>
@@ -54,14 +53,7 @@ const FooterShop = () => {
           <ul className="mb-4">
             <li>FAQ</li>
             <li>Karir</li>
-            <li>EVENT PENTING <i className="fas fa-rocket"></i></li>
-            <li>Daftar Afiliasi GRATIS</li>
-            <li>Jadi Reseller</li>
-            <li>Mitra Reseller</li>
-            <li>Ebook Bisnis [Gratis]</li>
-            <li>Katalog Buku</li>
-            <li>Tentang Kami</li>
-            <li>Ajukan Partnership</li>
+
           </ul>
           <h2 className="text-orange-500 mb-2">Pengiriman</h2>
           <div className="mb-4">
