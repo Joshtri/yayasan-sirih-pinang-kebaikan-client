@@ -126,7 +126,7 @@ const DetailBookProduct = () => {
       {/* Card Deskripsi Buku */}
       <div className="bg-white mt-8 p-6 rounded-lg shadow-md">
         <h2 className="text-lg font-bold mb-2">Deskripsi Buku</h2>
-        <p className="text-gray-700 text-xl tracking-wide">
+        <p className="text-gray-700 text-xl tracking-wide text-justify">
           {book.deskripsi_singkat || 'Deskripsi belum tersedia untuk buku ini.'}
         </p>
       </div>
@@ -134,7 +134,7 @@ const DetailBookProduct = () => {
       {/* Card Deskripsi Buku */}
       <div className="bg-white mt-8 p-6 rounded-lg shadow-md">
         <h2 className="text-lg font-bold mb-2">Sinopsis Buku</h2>
-        <p className="text-gray-700 text-xl tracking-wide">
+        <p className="text-gray-700 text-xl tracking-wide text-justify">
           {book.sinopsis_singkat || 'Deskripsi belum tersedia untuk buku ini.'}
         </p>
       </div>
