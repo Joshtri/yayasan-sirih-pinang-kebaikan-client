@@ -133,9 +133,9 @@ const DetailBookProduct = () => {
 
       {/* Card Deskripsi Buku */}
       <div className="bg-white mt-8 p-6 rounded-lg shadow-md">
-        <h2 className="text-lg font-bold mb-2"><Sinopsis></Sinopsis> Buku</h2>
+        <h2 className="text-lg font-bold mb-2">Sinopsis Buku</h2>
         <p className="text-gray-700 text-xl tracking-wide">
-          {book.deskripsi_singkat || 'Deskripsi belum tersedia untuk buku ini.'}
+          {book.sinopsis_singkat || 'Deskripsi belum tersedia untuk buku ini.'}
         </p>
       </div>
     </div>
