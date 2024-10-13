@@ -21,13 +21,13 @@ const NavbarShop = () => {
         {/* Navbar Links */}
         <Navbar.Collapse className={`md:flex ${isOpen ? 'block' : 'hidden'}`}>
           <Link to="/" className="text-white text-sm px-3 py-2 hover:bg-blue-800 rounded">KATEGORI</Link>
-          <Link to="/penghasilan-tambahan" className="text-white text-sm px-3 py-2 hover:bg-blue-800 rounded">PENGHASILAN TAMBAHAN</Link>
-          <Link to="/promo" className="text-white text-sm px-3 py-2 hover:bg-blue-800 rounded">PROMO</Link>
-          <Link to="/penerbitan" className="text-white text-sm px-3 py-2 hover:bg-blue-800 rounded">PENERBITAN</Link>
-          <Link to="/pembelian-buku" className="text-white text-sm px-3 py-2 hover:bg-blue-800 rounded">PEMBELIAN BUKU</Link>
-          <Link to="/blog" className="text-white text-sm px-3 py-2 hover:bg-blue-800 rounded">BLOG</Link>
-          <Link to="/ebook-reseller" className="text-white text-sm px-3 py-2 hover:bg-blue-800 rounded">EBOOK RESELLER</Link>
-          <Link to="/cek-resi" className="text-white text-sm px-3 py-2 hover:bg-blue-800 rounded">CEK RESI</Link>
+          {/* <Link to="/penghasilan-tambahan" className="text-white text-sm px-3 py-2 hover:bg-blue-800 rounded">PENGHASILAN TAMBAHAN</Link> */}
+          {/* <Link to="/promo" className="text-white text-sm px-3 py-2 hover:bg-blue-800 rounded">PROMO</Link> */}
+          {/* <Link to="/penerbitan" className="text-white text-sm px-3 py-2 hover:bg-blue-800 rounded">PENERBITAN</Link> */}
+          {/* <Link to="/pembelian-buku" className="text-white text-sm px-3 py-2 hover:bg-blue-800 rounded">PEMBELIAN BUKU</Link> */}
+          {/* <Link to="/blog" className="text-white text-sm px-3 py-2 hover:bg-blue-800 rounded">BLOG</Link> */}
+          {/* <Link to="/ebook-reseller" className="text-white text-sm px-3 py-2 hover:bg-blue-800 rounded">EBOOK RESELLER</Link> */}
+          {/* <Link to="/cek-resi" className="text-white text-sm px-3 py-2 hover:bg-blue-800 rounded">CEK RESI</Link> */}
         </Navbar.Collapse>
       </Navbar>
     </header>

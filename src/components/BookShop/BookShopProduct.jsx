@@ -74,7 +74,6 @@ function BookShopProduct() {
       <div className="bg-white p-6 rounded-lg shadow-md">
         <div className="flex items-center mb-4">
           <h2 className="text-xl font-bold text-purple-700">BUKU TERBARU</h2>
-
         </div>
 
         {/* Grid Produk atau Skeleton */}

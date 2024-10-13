@@ -20,6 +20,8 @@ import VisiMisiPage from './pages/About/VisiMisiPage'
 import SejarahPage from './pages/About/SejarahPage'
 import BerandaBookShop from './pages/TokoOnline/BerandaBookShop'
 import DetailBookPage from './pages/TokoOnline/DetailBookPage'
+import ArticlePage from './pages/Article/ArticlePage'
+import ReadArticlePage from './pages/Article/ReadArticlePage'
 
 function App() {
   // const user = localStorage.getItem("token");
@@ -49,6 +51,8 @@ function App() {
 
           <Route path='/toko-buku' element={<BerandaBookShop/>}/>
           <Route path='/produk-buku/:id' element={<DetailBookPage/>}/>
+          <Route path='/article/:id' element={<ReadArticlePage/>}/>
+          <Route path='/article' element={<ArticlePage/>}/>
 
 
           {/* <Route path='/login' element={<LoginUser/>}/>
