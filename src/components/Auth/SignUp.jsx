@@ -1,107 +1,157 @@
-// import { useState } from 'react';
-// import axios from 'axios';
-// import { Link, useNavigate } from 'react-router-dom';
-// import './signup.css'; // Import your custom CSS file
+// src/components/Signup.js
+import { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import { Button, Checkbox, Label, TextInput } from 'flowbite-react';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import logoYayasan from '../../assets/logoYayasan.jpg';
 
-// const Signup = () => {
-// 	const [data, setData] = useState({
-// 		firstName: "",
-// 		lastName: "",
-// 		email: "",
-// 		password: "",
-// 	});
-// 	const [error, setError] = useState("");
-// 	const navigate = useNavigate();
+function Signup() {
+  const [data, setData] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    password: '',
+  });
+  const [error, setError] = useState('');
+  const navigate = useNavigate(); // Navigate untuk mengarahkan setelah signup
 
-// 	const handleChange = ({ currentTarget: input }) => {
-// 		setData({ ...data, [input.name]: input.value });
-// 	};
+  const handleChange = (e) => {
+    setData({ ...data, [e.target.name]: e.target.value });
+  };
 
-// 	const handleSubmit = async (e) => {
-// 		e.preventDefault();
-// 		try {
-// 			const url = `${import.meta.env.VITE_BASE_URL}/api/v1/user`;
-// 			const { data: res } = await axios.post(url, data);
-// 			navigate("/login");
-// 			console.log(res.message);
-// 		} catch (error) {
-// 			if (
-// 				error.response &&
-// 				error.response.status >= 400 &&
-// 				error.response.status <= 500
-// 			) {
-// 				setError(error.response.data.message);
-// 			}
-// 		}
-// 	};
-//     return (
-//         <div className="signup_container">
-//             <div className="signup_form_container">
-//                 {/* Left Section */}
-//                 <div className="left">
-//                     <h1>Welcome Back</h1>
-//                     <Link to="/login">
-//                         <button
-//                             type="button"
-//                             className="white_btn"
-//                         >
-//                             Sign In
-//                         </button>
-//                     </Link>
-//                 </div>
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const url = `${import.meta.env.VITE_BASE_URL}/api/v1/signup`; // API Signup
+      const response = await axios.post(url, data);
+      console.log('Signup response:', response);
 
-//                 {/* Right Section */}
-//                 <div className="right">
-//                     <form className="form_container" onSubmit={handleSubmit}>
-//                         <h1>Create Account</h1>
-//                         <input
-//                             type="text"
-//                             placeholder="First Name"
-//                             name="firstName"
-//                             onChange={handleChange}
-//                             value={data.firstName}
-//                             required
-//                             className="input"
-//                         />
-//                         <input
-//                             type="text"
-//                             placeholder="Last Name"
-//                             name="lastName"
-//                             onChange={handleChange}
-//                             value={data.lastName}
-//                             required
-//                             className="input"
-//                         />
-//                         <input
-//                             type="email"
-//                             placeholder="Email"
-//                             name="email"
-//                             onChange={handleChange}
-//                             value={data.email}
-//                             required
-//                             className="input"
-//                         />
-//                         <input
-//                             type="password"
-//                             placeholder="Password"
-//                             name="password"
-//                             onChange={handleChange}
-//                             value={data.password}
-//                             required
-//                             className="input"
-//                         />
-//                         {error && <div className="error_msg">{error}</div>}
-//                         <button
-//                             type="submit"
-//                             className="green_btn"
-//                         >
-//                             Sign Up
-//                         </button>
-//                     </form>
-//                 </div>
-//             </div>
-//         </div>
-//     );
-// };
+      toast.success('Registrasi berhasil! Silakan login.');
+      setTimeout(() => {
+        navigate('/'); // Redirect ke halaman login setelah berhasil
+      }, 2000);
+    } catch (error) {
+      console.error('Error during signup:', error);
+      if (
+        error.response &&
+        error.response.status >= 400 &&
+        error.response.status <= 500
+      ) {
+        setError(error.response.data.message);
+      }
+    }
+  };
 
-// export default Signup;
+  return (
+    <div className="h-screen flex items-center justify-center bg-gray-100 mt-20 pt-20 pb-20 mb-20">
+      <ToastContainer position="top-right" autoClose={3000} />
+      <div className="flex shadow-lg rounded-lg overflow-hidden max-w-4xl w-full">
+        <div className="hidden md:flex flex-col justify-center items-center bg-blue-600 text-white w-1/2 p-10">
+          <img
+            src={logoYayasan}
+            alt="Logo Yayasan"
+            className="mb-5 w-40 h-40 object-contain"
+          />
+          <h2 className="text-2xl font-bold mb-2">Bergabung Sekarang</h2>
+          <p className="text-center">
+            Daftarkan akun Anda dan mulai berbagi artikel menarik.
+          </p>
+        </div>
+
+        <div className="bg-white w-full md:w-1/2 p-8">
+          <div className="text-center mb-6">
+            <h2 className="text-2xl font-bold">Buat Akun Baru</h2>
+            <p className="text-gray-600">Isi form di bawah untuk mendaftar.</p>
+          </div>
+
+          <form onSubmit={handleSubmit} className="space-y-4">
+            <div>
+              <Label htmlFor="firstName" value="First Name" />
+              <TextInput
+                id="firstName"
+                type="text"
+                placeholder="Masukkan nama depan"
+                name="firstName"
+                value={data.firstName}
+                onChange={handleChange}
+                required
+                className="mt-1"
+              />
+            </div>
+
+            <div>
+              <Label htmlFor="lastName" value="Last Name" />
+              <TextInput
+                id="lastName"
+                type="text"
+                placeholder="Masukkan nama belakang"
+                name="lastName"
+                value={data.lastName}
+                onChange={handleChange}
+                required
+                className="mt-1"
+              />
+            </div>
+
+            <div>
+              <Label htmlFor="email" value="Email address" />
+              <TextInput
+                id="email"
+                type="email"
+                placeholder="Masukkan email"
+                name="email"
+                value={data.email}
+                onChange={handleChange}
+                required
+                className="mt-1"
+              />
+            </div>
+
+            <div>
+              <Label htmlFor="password" value="Password" />
+              <TextInput
+                id="password"
+                type="password"
+                placeholder="Masukkan password"
+                name="password"
+                value={data.password}
+                onChange={handleChange}
+                required
+                className="mt-1"
+              />
+            </div>
+
+            {error && <div className="text-red-500">{error}</div>}
+
+            <div className="flex items-center mt-4">
+              <Checkbox id="terms" required />
+              <Label htmlFor="terms" className="ml-2">
+                I agree to the{' '}
+                <Link to="/terms" className="text-blue-600 hover:underline">
+                  terms and conditions
+                </Link>
+              </Label>
+            </div>
+
+            <Button type="submit" className="w-full mt-4">
+              Daftar
+            </Button>
+          </form>
+
+          <div className="text-center mt-4">
+            <span className="text-sm text-gray-600">
+              Sudah punya akun?{' '}
+            </span>
+            <Link to="/auth/login" className="text-sm text-blue-600 hover:underline">
+              Login
+            </Link>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export default Signup;

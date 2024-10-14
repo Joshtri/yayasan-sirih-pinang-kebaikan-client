@@ -1,20 +1,32 @@
-// import React from "react";
-// import { Navigate } from "react-router-dom";
-
-// const ProtectedRoute = ({ element: Component }) => {
-//     const user = localStorage.getItem("token");
-//     return user ? <Component /> : <Navigate to="/login" />;
-// };
-
-// export default ProtectedRoute;
+// import React from 'react';
+import PropTypes from 'prop-types';
 import { Navigate } from 'react-router-dom';
+import { isAuthenticated } from '../../utils/Auth'; // Import fungsi isAuthenticated
 
-// eslint-disable-next-line react/prop-types
-const ProtectedRoute = ({ element }) => {
-  const user = localStorage.getItem("token");
-  
-  // If token exists, allow access to the component, otherwise redirect to login
-  return user ? element : <Navigate to="/login" />;
+const ProtectedRoute = ({ element: Component, allowedRoles }) => {
+  const role = localStorage.getItem('role');
+  const tokenExists = isAuthenticated(); // Gunakan fungsi yang sudah diperbaiki
+
+  console.log('Token exists:', tokenExists); // Debugging
+  console.log('User role:', role); // Debugging
+  console.log('Allowed roles:', allowedRoles); // Debugging
+
+  if (!tokenExists) {
+    console.warn('User not authenticated. Redirecting to /auth/login.');
+    return <Navigate to="/auth/login" replace />;
+  }
+
+  if (allowedRoles && !allowedRoles.includes(role)) {
+    console.warn(`Role ${role} not authorized. Redirecting to /dashboard.`);
+    return <Navigate to="/auth/login" replace />;
+  }
+
+  return <Component />;
+};
+
+ProtectedRoute.propTypes = {
+  element: PropTypes.elementType.isRequired,
+  allowedRoles: PropTypes.arrayOf(PropTypes.string),
 };
 
 export default ProtectedRoute;

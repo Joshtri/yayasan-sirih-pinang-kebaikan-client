@@ -1,79 +1,140 @@
-// import { useState } from 'react';
-// import { Link, useNavigate } from 'react-router-dom';
-// import PropTypes from 'prop-types'; // Import prop-types
-// import styles from './Login.module.css';
-// import axios from 'axios';
+// src/components/Login.js
+import { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import { Button, Checkbox, Label, TextInput } from 'flowbite-react';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import logoYayasan from '../../assets/logoYayasan.jpg';
 
-// function Login({ setIsLoggedIn }) {
-//   const [data, setData] = useState({ email: "", password: "" });
-//   const [error, setError] = useState("");
-//   const navigate = useNavigate();
+function Login() {
+  const [data, setData] = useState({ email: '', password: '' });
+  const [error, setError] = useState('');
+  const navigate = useNavigate(); // Inisialisasi navigate
 
-//   const handleChange = ({ currentTarget: input }) => {
-//     setData({ ...data, [input.name]: input.value });
-//   };
+  const handleChange = (e) => {
+    setData({ ...data, [e.target.name]: e.target.value });
+  };
 
-//   const handleSubmit = async (e) => {
-//     e.preventDefault();
-//     console.log("Form submitted with data:", data); // Log the data
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const url = `${import.meta.env.VITE_BASE_URL}/api/v1/auth`;
+      const response = await axios.post(url, data);
+      console.log('Full API response:', response);
 
-//     try {
-//       const url = `${import.meta.env.VITE_BASE_URL}/api/v1/auth`;
-//       const { data: res } = await axios.post(url, data);
-//       console.log("Response received:", res); // Log the response
-//       localStorage.setItem("token", res.data); // Make sure this is the correct data structure
-//       setIsLoggedIn(true); // Ensure this is called after successful login
-//       navigate("/user");
-//     } catch (error) {
-//       console.log("Error occurred:", error); // Log the error
-//       if (error.response && error.response.status >= 400 && error.response.status <= 500) {
-//         setError(error.response.data.message);
-//       }
-//     }
-//   };
+      const res = response.data;
 
-//   return (
-//     <div className={styles.login_container}>
-//       <div className={styles.login_form_container}>
-//         <div className={styles.left}>
-//           <form className={styles.form_container} onSubmit={handleSubmit}>
-//             <h1>Login to Your Account</h1>
-//             <input
-//               type="email"
-//               placeholder="Email"
-//               name="email"
-//               onChange={handleChange}
-//               value={data.email}
-//               required
-//               className={styles.input}
-//             />
-//             <input
-//               type="password"
-//               placeholder="Password"
-//               name="password"
-//               onChange={handleChange}
-//               value={data.password}
-//               required
-//               className={styles.input}
-//             />
-//             {error && <div className={styles.error_msg}>{error}</div>}
-//             <button type="submit" className={styles.green_btn}>Sign In</button>
-//           </form>
-//         </div>
-//         <div className={styles.right}>
-//           <h1>New Here?</h1>
-//           <Link to="/sign-up">
-//             <button type="button" className={styles.white_btn}>Sign Up</button>
-//           </Link>
-//         </div>
-//       </div>
-//     </div>
-//   );
-// }
+      // Simpan token dan informasi user ke localStorage
+      localStorage.setItem('token', res.token);
+      localStorage.setItem('firstName', res.user.firstName);
+      localStorage.setItem('lastName', res.user.lastName);
+      localStorage.setItem('role', res.user.role);
+      localStorage.setItem('id', res.user.id);
 
-// // Add prop-types validation
-// Login.propTypes = {
-//   setIsLoggedIn: PropTypes.func.isRequired, // Ensure setIsLoggedIn is a function and is required
-// };
+      toast.success('Login berhasil!');
+      setTimeout(() => {
+        //login berhasil maka masuk ke dashboard author yang di protected.
+        navigate('/my/author/dashboard'); // Arahkan ke dashboard author setelah berhasil login
+      }, 2000);
+    } catch (error) {
+      console.error('Error occurred:', error);
+      if (
+        error.response &&
+        error.response.status >= 400 &&
+        error.response.status <= 500
+      ) {
+        setError(error.response.data.message);
+      }
+    }
+  };
 
-// export default Login;
+  return (
+    <div className="h-screen flex items-center justify-center bg-gray-100">
+      <ToastContainer position="top-right" autoClose={3000} />
+      <div className="flex shadow-lg rounded-lg overflow-hidden max-w-4xl w-full">
+        <div className="hidden md:flex flex-col justify-center items-center bg-blue-600 text-white w-1/2 p-10">
+          <img
+            src={logoYayasan}
+            alt="Logo Yayasan"
+            className="mb-5 w-40 h-40 object-contain"
+          />
+          <h2 className="text-2xl font-bold mb-2">Selamat Datang</h2>
+          <p className="text-center">
+            Silakan masuk untuk melanjutkan dan menikmati layanan kami.
+          </p>
+        </div>
+
+        <div className="bg-white w-full md:w-1/2 p-8">
+          <div className="text-center mb-6">
+            <h2 className="text-2xl font-bold">Hello, Again!</h2>
+            <p className="text-gray-600">We are happy to have you back.</p>
+          </div>
+
+          <form onSubmit={handleSubmit} className="space-y-4">
+            <div>
+              <Label htmlFor="email" value="Email address" />
+              <TextInput
+                id="email"
+                type="email"
+                placeholder="Enter email"
+                name="email"
+                value={data.email}
+                onChange={handleChange}
+                required
+                className="mt-1"
+              />
+            </div>
+
+            <div>
+              <Label htmlFor="password" value="Password" />
+              <TextInput
+                id="password"
+                type="password"
+                placeholder="Enter password"
+                name="password"
+                value={data.password}
+                onChange={handleChange}
+                required
+                className="mt-1"
+              />
+            </div>
+
+            {error && <div className="text-red-500">{error}</div>}
+
+            <div className="flex items-center justify-between mt-4">
+              <Checkbox id="remember" />
+              <Label htmlFor="remember" className="ml-2">
+                Remember Me
+              </Label>
+              <Link
+                to="/forgot-password"
+                className="text-sm text-blue-600 hover:underline"
+              >
+                Forgot Password?
+              </Link>
+            </div>
+
+            <Button type="submit" className="w-full mt-4">
+              Login
+            </Button>
+          </form>
+
+          <div className="text-center mt-4">
+            <span className="text-sm text-gray-600">
+              Don`t have an account?{' '}
+            </span>
+            <Link
+              to="/auth/signup"
+              className="text-sm text-blue-600 hover:underline"
+            >
+              Sign Up
+            </Link>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export default Login;

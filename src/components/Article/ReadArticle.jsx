@@ -10,8 +10,10 @@ import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import CommentArticle from "./CommentArticle";
 import CommentList from "./CommentList";
+
 function ReadArticle() {
   const [article, setArticle] = useState(null);
+  const [penulisId, setPenulisId] = useState(''); // State untuk penulisId
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const { id } = useParams();
@@ -20,7 +22,7 @@ function ReadArticle() {
 
   const handleCommentAdded = (comment) => {
     setNewComment(comment); // Set komentar baru untuk diperbarui di CommentList
-    // toast.success("Komentar berhasil ditambahkan!"); // Notifikasi berhasil
+    toast.success("Komentar berhasil ditambahkan!"); // Notifikasi berhasil
   };
 
   useEffect(() => {
@@ -32,6 +34,9 @@ function ReadArticle() {
     try {
       const response = await axios.get(`${import.meta.env.VITE_BASE_URL}/api/v1/article/${id}`);
       setArticle(response.data.data);
+      setPenulisId(response.data.data.penulisId); // Set penulisId dari respons API
+
+      // console.log(`ID dari penulis : ` , penulisId);
       setLoading(false);
     } catch (error) {
       console.error("Gagal memuat artikel:", error);
@@ -138,7 +143,7 @@ function ReadArticle() {
         </div>
 
         {/* Komponen Form Tambah Komentar */}
-        <CommentArticle artikelId={id} onCommentAdded={handleCommentAdded} />
+        <CommentArticle penulisId={penulisId} artikelId={id} onCommentAdded={handleCommentAdded} />
         <CommentList artikelId={id} newComment={newComment} />
       </div>
     </>

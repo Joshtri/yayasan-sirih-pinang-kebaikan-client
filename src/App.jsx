@@ -8,7 +8,7 @@ import Contact from './pages/Contact/Contact'
 import Publish from './pages/Publishing/Publish'
 // import LoginUser from './pages/LoginUser'
 // import SignUpUser from './pages/SignUpUser'
-// import ProtectedRoute from './components/Auth/ProtectedRoute'
+import ProtectedRoute from './components/Auth/ProtectedRoute'
 
 import FormAuthorPublish from './pages/Publishing/FormAuthorPublish'
 import ProgressCek from './pages/Service/ProgressCek'
@@ -22,6 +22,16 @@ import BerandaBookShop from './pages/TokoOnline/BerandaBookShop'
 import DetailBookPage from './pages/TokoOnline/DetailBookPage'
 import ArticlePage from './pages/Article/ArticlePage'
 import ReadArticlePage from './pages/Article/ReadArticlePage'
+import LoginPage from './pages/Auth/LoginPage'
+import MainDashboard from './components/User/Dashboard/MainDashboard'
+import UserDashboardPage from './pages/UserAuthor/UserDashboardPage'
+import SignUpPage from './pages/Auth/SignUpPage'
+import ListArticle from './components/User/ArticleData/ListArticle'
+import ListArticlePage from './pages/UserAuthor/ListArticlePage'
+import { element } from 'prop-types'
+import AddArticlePage from './pages/UserAuthor/AddArticlePage'
+import PreviewArticlePage from './pages/UserAuthor/PreviewArticlePage'
+import EditArticlePage from './pages/UserAuthor/EditArticlePage'
 
 function App() {
   // const user = localStorage.getItem("token");
@@ -54,7 +64,24 @@ function App() {
           <Route path='/article/:id' element={<ReadArticlePage/>}/>
           <Route path='/article' element={<ArticlePage/>}/>
 
+          <Route path='/auth/login' element={<LoginPage/>}/>
+          <Route path='/auth/signup' element={<SignUpPage/>}/>
 
+
+                  {/* Rute Create Article, hanya bisa diakses author */}
+          {/* <Route
+            path="/create-article"
+            element={<ProtectedRoute element={MainDashboard} allowedRoles={['author']} />}
+          /> */}
+
+          <Route path='/my/author/dashboard' element={<ProtectedRoute element={UserDashboardPage} allowedRoles={['author']}/>}/>
+
+          <Route path='/my/author/posted-article' element={<ProtectedRoute element={ListArticlePage} allowedRoles={['author']}/>}/>
+
+          <Route path='/my/author/add-article' element={<ProtectedRoute element={AddArticlePage}allowedRoles={['author']}/> }/> 
+          <Route path='/my/author/posted-article/:id' element={<ProtectedRoute element={PreviewArticlePage} allowedRoles={['author']}/>}/>
+
+          <Route path='/my/author/edit/posted-article/:id' element={<ProtectedRoute element={EditArticlePage} allowedRoles={['author']}/>}/>
           {/* <Route path='/login' element={<LoginUser/>}/>
           <Route path='/sign-up' element={<SignUpUser/>}/> */}
         </Routes>
