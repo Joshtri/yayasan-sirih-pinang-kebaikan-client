@@ -2,7 +2,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { FaShareAlt, FaBookOpen } from 'react-icons/fa';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { isAuthenticated } from '../../utils/Auth'; // Import fungsi pengecekan login
 
 const categories = ['Lagi Bener', 'Kotak Surat', 'Daily Life', 'Jalan-Jalan'];
 
@@ -28,6 +29,26 @@ function Article() {
     fetchPosts();
   }, []);
 
+  // Fungsi untuk mengecek apakah pengguna sudah login
+  // const isAuthenticated = () => {
+  //   return !!localStorage.getItem('token'); // Cek token di localStorage
+  // };
+
+  // Fungsi untuk menangani klik tombol "Mulai Menulis"
+  const handleWriteArticleClick = () => {
+    const loggedIn = isAuthenticated();
+    console.log('User is authenticated:', loggedIn); // Debugging
+
+    if (loggedIn) {
+      console.log('Navigating to /my/author/dashboard'); // Debugging
+      navigate('/my/author/dashboard');
+    } else {
+      console.warn('User not logged in. Redirecting to /auth/login'); // Debugging
+      alert('Anda harus login terlebih dahulu untuk membuat artikel.');
+      navigate('/auth/login');
+    }
+  };
+
   const handleShare = (title) => {
     const shareUrl = window.location.href;
     navigator.clipboard.writeText(`${title} - ${shareUrl}`);
@@ -38,16 +59,19 @@ function Article() {
     <div className="container mx-auto px-4 py-8 bg-slate-100">
       <h1 className="text-4xl font-bold text-center mb-6 mt-3">ARTIKEL</h1>
 
-      {/* <div className="flex justify-center space-x-4 mb-8">
-        {categories.map((category, index) => (
-          <button
-            key={index}
-            className="bg-blue-800 text-white px-6 py-2 rounded-full shadow-md hover:bg-blue-600 transition"
-          >
-            {category}
-          </button>
-        ))}
-      </div> */}
+      {/* Banner Iklan untuk Mengajak Menulis */}
+      <div className="bg-blue-600 text-white p-6 rounded-lg shadow-lg mb-10 text-center transition hover:shadow-xl hover:bg-blue-700">
+        <h2 className="text-2xl font-semibold mb-2">Ingin Berkontribusi? Tulis Artikelmu di Sini!</h2>
+        <p className="mb-4">Bagikan pengetahuan dan pengalamanmu dengan kami. Klik tombol di bawah ini dan mulai menulis sekarang!</p>
+        <button
+          // to='/auth/login'
+          onClick={handleWriteArticleClick} // Panggil fungsi handleWriteArticleClick
+
+          className="bg-white text-blue-600 px-6 py-2 rounded-full font-semibold hover:bg-gray-100 transition"
+        >
+          Mulai Menulis
+        </button>
+      </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 p-20 lg:grid-cols-3 gap-6 pb-10 pt-4">
         {loading
