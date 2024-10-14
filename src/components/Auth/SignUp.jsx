@@ -26,23 +26,23 @@ function Signup() {
     try {
       const url = `${import.meta.env.VITE_BASE_URL}/api/v1/signup`; // API Signup
       const response = await axios.post(url, data);
+  
+      // Berhasil signup
       console.log('Signup response:', response);
-
       toast.success('Registrasi berhasil! Silakan login.');
       setTimeout(() => {
-        navigate('/'); // Redirect ke halaman login setelah berhasil
+        navigate('/auth/login'); // Redirect ke halaman login
       }, 2000);
     } catch (error) {
       console.error('Error during signup:', error);
-      if (
-        error.response &&
-        error.response.status >= 400 &&
-        error.response.status <= 500
-      ) {
-        setError(error.response.data.message);
+      if (error.response && error.response.status >= 400 &&error.response.status <= 500) {
+        setError(error.response.data.message); // Tampilkan pesan error
+      } else {
+        setError('Terjadi kesalahan. Coba lagi nanti.');
       }
     }
   };
+  
 
   return (
     <div className="h-screen flex items-center justify-center bg-gray-100 mt-20 pt-20 pb-20 mb-20">

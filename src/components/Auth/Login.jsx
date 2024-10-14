@@ -67,8 +67,8 @@ function Login() {
 
         <div className="bg-white w-full md:w-1/2 p-8">
           <div className="text-center mb-6">
-            <h2 className="text-2xl font-bold">Hello, Again!</h2>
-            <p className="text-gray-600">We are happy to have you back.</p>
+            <h2 className="text-2xl font-bold">Salam hangat kembali!</h2>
+            <p className="text-gray-600">Kami sangat senang Anda kembali bersama kami.</p>
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-4">
