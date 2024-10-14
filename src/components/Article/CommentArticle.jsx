@@ -4,7 +4,8 @@ import axios from 'axios';
 import { Button } from 'flowbite-react';
 import { toast } from 'react-toastify';
 
-function CommentArticle({ artikelId, onCommentAdded }) {
+
+function CommentArticle({ artikelId, penulisId,onCommentAdded }) {
   const [namaPengguna, setNamaPengguna] = useState('');
   const [isiKomentar, setIsiKomentar] = useState('');
   const [error, setError] = useState('');
@@ -18,6 +19,7 @@ function CommentArticle({ artikelId, onCommentAdded }) {
         namaPengguna,
         isiKomentar,
         artikelId,
+        penulisId
       });
 
       setNamaPengguna('');
