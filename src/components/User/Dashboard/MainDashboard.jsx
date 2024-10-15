@@ -29,6 +29,7 @@ function MainDashboard() {
     if (penulisId) {
       fetchTotalArticles(penulisId); // Ambil total artikel
       fetchTotalComments(penulisId); // Ambil total komentar
+      fetchTotalArticlesDraft(penulisId);
     }
   }, []);
 
@@ -44,6 +45,20 @@ function MainDashboard() {
       setError('Gagal mengambil total artikel.');
     }
   };
+
+    // Fungsi untuk mengambil total artikel
+    const fetchTotalArticlesDraft = async (penulisId) => {
+      try {
+        const response = await axios.get(
+          `${import.meta.env.VITE_BASE_URL}/api/v1/article-draft/count/${penulisId}`
+        );
+        setTotalDrafts(response.data.count);
+      } catch (error) {
+        console.error('Error fetching total draft articles:', error);
+        setError('Gagal mengambil total draft artikel.');
+      }
+    };
+  
 
   // Fungsi untuk mengambil total komentar
   const fetchTotalComments = async (penulisId) => {
@@ -98,7 +113,7 @@ function MainDashboard() {
         </Card>
         <Card>
           <h5 className="text-lg font-medium">Draft Artikel</h5>
-          <p className="text-gray-600">12</p>
+          <p className="text-gray-600">{totalDrafts}</p>
         </Card>
       </div>
 

@@ -3,16 +3,18 @@ import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
 import { Breadcrumb, Button, Modal, Spinner, Tooltip } from 'flowbite-react';
 import { FaTrash, FaEdit, FaEye } from 'react-icons/fa';
+import { ToastContainer, toast } from 'react-toastify';
+import '../ArticleData/toggleslider.css'; // Import CSS
 
 function ListArticle() {
-  const [data, setData] = useState([]); // Pastikan diinisialisasi dengan array kosong
+  const [data, setData] = useState([]); // Artikel dari API
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const [searchTerm, setSearchTerm] = useState('');
   const [showModal, setShowModal] = useState(false);
   const [selectedArticleId, setSelectedArticleId] = useState(null);
   const navigate = useNavigate();
-  const penulisId = localStorage.getItem('id'); // Mendapatkan penulisId dari localStorage
+  const penulisId = localStorage.getItem('id'); // Ambil ID penulis dari localStorage
 
   const openModal = (id) => {
     setSelectedArticleId(id);
@@ -24,13 +26,13 @@ function ListArticle() {
     setSelectedArticleId(null);
   };
 
+  // Fetch data artikel saat komponen dimuat
   useEffect(() => {
     const fetchData = async () => {
       try {
         const url = `${import.meta.env.VITE_BASE_URL}/api/v1/article/penulis/${penulisId}`;
         const response = await axios.get(url);
-        const articles = response.data.data || []; // Jika data undefined, set array kosong
-        setData(articles);
+        setData(response.data.data || []); // Set artikel ke state
       } catch (error) {
         console.error('Error fetching articles:', error);
         setError('Terjadi kesalahan saat mengambil data artikel.');
@@ -41,21 +43,41 @@ function ListArticle() {
     fetchData();
   }, [penulisId]);
 
+  // Hapus artikel berdasarkan ID
   const handleDelete = async () => {
     try {
       const url = `${import.meta.env.VITE_BASE_URL}/api/v1/article/${selectedArticleId}`;
       await axios.delete(url);
       setData((prevData) => prevData.filter((article) => article._id !== selectedArticleId));
-      alert('Artikel berhasil dihapus.');
+      toast.success('Artikel berhasil dihapus.');
     } catch (error) {
       console.error('Error deleting article:', error);
-      alert('Terjadi kesalahan saat menghapus artikel.');
+      toast.error('Terjadi kesalahan saat menghapus artikel.');
     } finally {
       closeModal();
     }
   };
 
-  const filteredArticles = data?.filter((article) =>
+  // Toggle status artikel antara 'publish' dan 'draft'
+  const toggleStatus = async (article) => {
+    const newStatus = article.statusArtikel === 'publish' ? 'draft' : 'publish';
+    try {
+      const url = `${import.meta.env.VITE_BASE_URL}/api/v1/article/${article._id}/status`;
+      await axios.patch(url, { statusArtikel: newStatus });
+      setData((prevData) =>
+        prevData.map((item) =>
+          item._id === article._id ? { ...item, statusArtikel: newStatus } : item
+        )
+      );
+      toast.success(`Status artikel berhasil diubah menjadi ${newStatus}.`);
+    } catch (error) {
+      console.error('Error updating article status:', error);
+      toast.error('Terjadi kesalahan saat mengubah status artikel.');
+    }
+  };
+
+  // Filter artikel berdasarkan pencarian
+  const filteredArticles = data.filter((article) =>
     article.judul.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
@@ -73,6 +95,7 @@ function ListArticle() {
 
   return (
     <div className="container mx-auto px-4 py-8">
+      <ToastContainer />
       <div className="flex justify-between items-center mb-6">
         <Breadcrumb>
           <Breadcrumb.Item href="/my/author/dashboard">Dashboard</Breadcrumb.Item>
@@ -104,6 +127,7 @@ function ListArticle() {
             <th className="border px-4 py-2">Judul</th>
             <th className="border px-4 py-2">Tanggal Publikasi</th>
             <th className="border px-4 py-2">Aksi</th>
+            <th className="border px-4 py-2">Ubah Status</th>
           </tr>
         </thead>
         <tbody>
@@ -115,6 +139,7 @@ function ListArticle() {
                 <td className="border px-4 py-2 text-center">
                   {new Date(article.createdAt).toLocaleDateString()}
                 </td>
+
                 <td className="border px-4 py-2 flex justify-center gap-2">
                   <Tooltip content="Preview">
                     <Button
@@ -146,11 +171,28 @@ function ListArticle() {
                     </Button>
                   </Tooltip>
                 </td>
+                <td className="border px-4 py-2 justify-center">
+                <div className="flex justify-center items-center">
+                  <Tooltip 
+                    content={article.statusArtikel === 'publish' ? 'Status: Publish' : 'Status: Draft'} 
+                    placement="top" // Menampilkan tooltip di atas toggle
+                  >
+                    <label className="switch">
+                      <input
+                        type="checkbox"
+                        checked={article.statusArtikel === 'publish'}
+                        onChange={() => toggleStatus(article)}
+                      />
+                      <span className="slider"></span>
+                    </label>
+                  </Tooltip>
+                  </div>
+                </td>
               </tr>
             ))
           ) : (
             <tr>
-              <td colSpan="4" className="text-center py-4">
+              <td colSpan="5" className="text-center py-4">
                 Tidak ada artikel ditemukan.
               </td>
             </tr>
@@ -160,9 +202,7 @@ function ListArticle() {
 
       <Modal show={showModal} onClose={closeModal}>
         <Modal.Header>Konfirmasi Hapus</Modal.Header>
-        <Modal.Body>
-          Apakah Anda yakin ingin menghapus artikel ini?
-        </Modal.Body>
+        <Modal.Body>Apakah Anda yakin ingin menghapus artikel ini?</Modal.Body>
         <Modal.Footer>
           <Button color="gray" onClick={closeModal}>
             Batal
