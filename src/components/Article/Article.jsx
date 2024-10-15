@@ -131,6 +131,17 @@ function SkeletonCard() {
 function EmptyArticleMessage() {
   const controls = useAnimation(); // Kontrol animasi
   const [isHappy, setIsHappy] = useState(false); // State untuk menentukan emoji
+  const navigate = useNavigate(); // Inisialisasi navigate
+  
+  const handleWriteArticleClick = () => {
+    const loggedIn = isAuthenticated();
+    if (loggedIn) {
+      navigate('/my/author/dashboard');
+    } else {
+      alert('Anda harus login terlebih dahulu untuk membuat artikel.');
+      navigate('/auth/login');
+    }
+  };
 
   // Animasi perubahan emoji dan warna
   useEffect(() => {
@@ -193,12 +204,13 @@ function EmptyArticleMessage() {
         Kami sedang menunggu kontribusi dari penulis hebat seperti Anda. Yuk, tulis artikel dan bagikan pengalaman Anda!
       </p>
 
-      <Link
+      <button
+        onClick={handleWriteArticleClick}
         to="/my/author/add-article"
         className="bg-blue-600 text-white px-4 py-2 rounded-full hover:bg-blue-700 transition"
       >
         Tulis Artikel Pertama
-      </Link>
+      </button>
     </div>
   );
 }
