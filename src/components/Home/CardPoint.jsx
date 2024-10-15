@@ -40,7 +40,7 @@ function CardPoint() {
             <FaStore className="text-4xl text-sky-500 transform transition hover:scale-150" />
           </div>
           <Link to='/toko-buku'>
-            <h2 className="text-lg font-semibold transform transition hover:scale-110">TOKO ONLINE BUKU</h2>
+            <h2 className="text-lg font-semibold transform transition hover:scale-110">YASIPIKAN STORE</h2>
           </Link>
         </Card>
       </div>
