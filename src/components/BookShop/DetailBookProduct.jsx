@@ -26,7 +26,6 @@ const DetailBookProduct = () => {
     fetchBook();
   }, [id]);
 
-  // Format harga ke dalam bentuk rupiah
   const formatPrice = (price) => {
     return new Intl.NumberFormat('id-ID', {
       style: 'currency',
@@ -63,7 +62,8 @@ const DetailBookProduct = () => {
     <div className="container mx-auto p-4 pb-20">
       <Breadcrumbs items={breadcrumbItems} />
       <div className="flex flex-col md:flex-row">
-        <div className="w-full md:w-1/2 flex justify-center items-center">
+        {/* Bagian Gambar Buku */}
+        <div className="w-full md:w-1/2 flex flex-col items-center">
           {imageLoading && (
             <div className="animate-pulse w-full max-w-sm bg-gray-300 h-64 rounded-lg"></div>
           )}
@@ -73,7 +73,19 @@ const DetailBookProduct = () => {
             className={`w-full max-w-sm rounded-lg shadow-md transition-opacity duration-500 ${imageLoading ? 'opacity-0' : 'opacity-100'}`}
             onLoad={() => setImageLoading(false)}
           />
+
+          {/* Tombol View PDF */}
+          {book.pdfDeskripsiUrl && (
+            <button
+              onClick={() => window.open(book.pdfDeskripsiUrl, '_blank')}
+              className="bg-blue-600 text-white px-4 py-2 rounded-lg mt-4 hover:bg-blue-500 transition"
+            >
+              Lihat PDF
+            </button>
+          )}
         </div>
+
+        {/* Detail Informasi Buku */}
         <div className="w-full md:w-1/2 pl-4 mt-4 md:mt-0">
           <h1 className="text-xl font-bold">{book.judul}</h1>
           <p className="text-red-500 text-2xl font-bold mt-2">{formatPrice(book.harga)}</p>
@@ -123,7 +135,7 @@ const DetailBookProduct = () => {
         </div>
       </div>
 
-      {/* Card Deskripsi Buku */}
+      {/* Deskripsi Buku */}
       <div className="bg-white mt-8 p-6 rounded-lg shadow-md">
         <h2 className="text-lg font-bold mb-2">Deskripsi Buku</h2>
         <p className="text-gray-700 text-xl tracking-wide text-justify">
@@ -131,11 +143,11 @@ const DetailBookProduct = () => {
         </p>
       </div>
 
-      {/* Card Deskripsi Buku */}
+      {/* Sinopsis Buku */}
       <div className="bg-white mt-8 p-6 rounded-lg shadow-md">
         <h2 className="text-lg font-bold mb-2">Sinopsis Buku</h2>
         <p className="text-gray-700 text-xl tracking-wide text-justify">
-          {book.sinopsis_singkat || 'Deskripsi belum tersedia untuk buku ini.'}
+          {book.sinopsis_singkat || 'Sinopsis belum tersedia untuk buku ini.'}
         </p>
       </div>
     </div>

@@ -102,12 +102,12 @@ function MainDashboard() {
         </Card>
       </div>
 
-      <section className="mt-8">
+      {/* <section className="mt-8">
         <h2 className="text-2xl font-semibold mb-4">Author Panel</h2>
         <p className="text-gray-600">
           Sebagai penulis, Anda dapat mengelola artikel Anda dan melihat statistik terkait.
         </p>
-      </section>
+      </section> */}
     </div>
   );
 }
