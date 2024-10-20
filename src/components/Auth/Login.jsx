@@ -10,14 +10,37 @@ import logoYayasan from '../../assets/logoYayasan.jpg';
 function Login() {
   const [data, setData] = useState({ email: '', password: '' });
   const [error, setError] = useState('');
-  const navigate = useNavigate(); // Inisialisasi navigate
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setData({ ...data, [e.target.name]: e.target.value });
   };
 
+  const validatePassword = (password) => {
+    const minLength = 8;
+    const hasUpperCase = /[A-Z]/.test(password);
+    const hasLowerCase = /[a-z]/.test(password);
+    const hasDigit = /\d/.test(password);
+    const hasSymbol = /[!@#$%^&*(),.?":{}|<>]/.test(password);
+    
+    return (
+      password.length >= minLength &&
+      hasUpperCase &&
+      hasLowerCase &&
+      hasDigit &&
+      hasSymbol
+    );
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // Validasi password sebelum login
+    if (!validatePassword(data.password)) {
+      setError('Password harus minimal 8 karakter dan mengandung huruf besar, huruf kecil, angka, dan simbol.');
+      return;
+    }
+
     try {
       const url = `${import.meta.env.VITE_BASE_URL}/api/v1/auth`;
       const response = await axios.post(url, data);
@@ -34,8 +57,7 @@ function Login() {
 
       toast.success('Login berhasil!');
       setTimeout(() => {
-        //login berhasil maka masuk ke dashboard author yang di protected.
-        navigate('/my/author/dashboard'); // Arahkan ke dashboard author setelah berhasil login
+        navigate('/my/author/dashboard');
       }, 2000);
     } catch (error) {
       console.error('Error occurred:', error);
@@ -122,7 +144,7 @@ function Login() {
 
           <div className="text-center mt-4">
             <span className="text-sm text-gray-600">
-              Don`t have an account?{' '}
+              Don't have an account?{' '}
             </span>
             <Link
               to="/auth/signup"

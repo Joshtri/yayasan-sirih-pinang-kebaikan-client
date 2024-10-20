@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
 import { Breadcrumb, Button, Label, TextInput, Textarea } from 'flowbite-react';
@@ -70,7 +70,7 @@ function EditArticle() {
       });
 
       alert('Artikel berhasil diperbarui.');
-      navigate('/posted-article');
+      navigate('/my/author/posted-article');
     } catch (error) {
       console.error(error);
       setError('Terjadi kesalahan saat memperbarui artikel.');

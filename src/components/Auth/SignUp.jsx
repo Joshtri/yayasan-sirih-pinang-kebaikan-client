@@ -5,6 +5,7 @@ import axios from 'axios';
 import { Button, Checkbox, Label, TextInput } from 'flowbite-react';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { FaEye, FaEyeSlash } from 'react-icons/fa'; // Import ikon mata
 import logoYayasan from '../../assets/logoYayasan.jpg';
 
 function Signup() {
@@ -14,35 +15,81 @@ function Signup() {
     email: '',
     password: '',
   });
-  const [error, setError] = useState('');
-  const navigate = useNavigate(); // Navigate untuk mengarahkan setelah signup
+  const [error, setError] = useState([]); // Ubah menjadi array untuk menampung multiple errors
+  const [showPassword, setShowPassword] = useState(false);
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setData({ ...data, [e.target.name]: e.target.value });
   };
 
+  // Fungsi validasi password
+  const validatePassword = (password) => {
+    const errors = [];
+
+    const minLength = 8;
+    if (password.length < minLength) {
+      errors.push('Password harus minimal 8 karakter.');
+    }
+
+    const hasUpperCase = /[A-Z]/.test(password);
+    if (!hasUpperCase) {
+      errors.push('Password belum memiliki huruf kapital.');
+    }
+
+    const hasLowerCase = /[a-z]/.test(password);
+    if (!hasLowerCase) {
+      errors.push('Password belum memiliki huruf kecil.');
+    }
+
+    const hasDigit = /\d/.test(password);
+    if (!hasDigit) {
+      errors.push('Password belum mengandung angka.');
+    }
+
+    const hasSymbol = /[!@#$%^&*(),.?":{}|<>]/.test(password);
+    if (!hasSymbol) {
+      errors.push('Password belum memiliki simbol.');
+    }
+
+    return errors;
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // Reset pesan error
+    setError([]);
+
+    // Validasi kekuatan password
+    const passwordErrors = validatePassword(data.password);
+    if (passwordErrors.length > 0) {
+      setError(passwordErrors);
+      return;
+    }
+
     try {
-      const url = `${import.meta.env.VITE_BASE_URL}/api/v1/signup`; // API Signup
+      const url = `${import.meta.env.VITE_BASE_URL}/api/v1/user`; // API Signup
       const response = await axios.post(url, data);
-  
+
       // Berhasil signup
-      console.log('Signup response:', response);
       toast.success('Registrasi berhasil! Silakan login.');
       setTimeout(() => {
         navigate('/auth/login'); // Redirect ke halaman login
       }, 2000);
     } catch (error) {
       console.error('Error during signup:', error);
-      if (error.response && error.response.status >= 400 &&error.response.status <= 500) {
-        setError(error.response.data.message); // Tampilkan pesan error
+      if (
+        error.response &&
+        error.response.status >= 400 &&
+        error.response.status <= 500
+      ) {
+        setError([error.response.data.message]); // Tampilkan pesan error dari server
       } else {
-        setError('Terjadi kesalahan. Coba lagi nanti.');
+        setError(['Terjadi kesalahan. Coba lagi nanti.']);
       }
     }
   };
-  
 
   return (
     <div className="h-screen flex items-center justify-center bg-gray-100 mt-20 pt-20 pb-20 mb-20">
@@ -68,7 +115,7 @@ function Signup() {
 
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
-              <Label htmlFor="firstName" value="First Name" />
+              <Label htmlFor="firstName" value="Nama Depan" />
               <TextInput
                 id="firstName"
                 type="text"
@@ -82,7 +129,7 @@ function Signup() {
             </div>
 
             <div>
-              <Label htmlFor="lastName" value="Last Name" />
+              <Label htmlFor="lastName" value="Nama Belakang" />
               <TextInput
                 id="lastName"
                 type="text"
@@ -96,7 +143,7 @@ function Signup() {
             </div>
 
             <div>
-              <Label htmlFor="email" value="Email address" />
+              <Label htmlFor="email" value="Alamat Email" />
               <TextInput
                 id="email"
                 type="email"
@@ -109,28 +156,45 @@ function Signup() {
               />
             </div>
 
-            <div>
+            <div className="relative">
               <Label htmlFor="password" value="Password" />
               <TextInput
                 id="password"
-                type="password"
+                type={showPassword ? 'text' : 'password'}
                 placeholder="Masukkan password"
                 name="password"
                 value={data.password}
                 onChange={handleChange}
                 required
-                className="mt-1"
+                className="mt-1 pr-10"
               />
+              <button
+                type="button"
+                onClick={() => setShowPassword(!showPassword)}
+                className="absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5"
+              >
+                {showPassword ? (
+                  <FaEyeSlash className="h-5 w-5 text-gray-500" />
+                ) : (
+                  <FaEye className="h-5 w-5 text-gray-500" />
+                )}
+              </button>
             </div>
 
-            {error && <div className="text-red-500">{error}</div>}
+            {error.length > 0 && (
+              <ul className="text-red-500 text-sm mt-1">
+                {error.map((errMsg, index) => (
+                  <li key={index}>{errMsg}</li>
+                ))}
+              </ul>
+            )}
 
             <div className="flex items-center mt-4">
               <Checkbox id="terms" required />
               <Label htmlFor="terms" className="ml-2">
-                I agree to the{' '}
+                Saya setuju dengan{' '}
                 <Link to="/terms" className="text-blue-600 hover:underline">
-                  terms and conditions
+                  syarat dan ketentuan
                 </Link>
               </Label>
             </div>
@@ -144,7 +208,10 @@ function Signup() {
             <span className="text-sm text-gray-600">
               Sudah punya akun?{' '}
             </span>
-            <Link to="/auth/login" className="text-sm text-blue-600 hover:underline">
+            <Link
+              to="/auth/login"
+              className="text-sm text-blue-600 hover:underline"
+            >
               Login
             </Link>
           </div>
