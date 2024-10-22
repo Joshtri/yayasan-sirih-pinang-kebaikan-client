@@ -93,9 +93,9 @@ function NavbarAuthor() {
 
           {/* User Dropdown (Desktop) */}
           <Dropdown label={`${firstName} ${lastName}`} inline={true} arrowIcon={false}>
-            {/* <Dropdown.Item onClick={() => navigate('/profile')}>
-              Profile
-            </Dropdown.Item> */}
+            <Dropdown.Item onClick={() => navigate('/my/author/profile')}>
+              My Profile
+            </Dropdown.Item>
             <Dropdown.Divider />
             <Dropdown.Item onClick={handleLogout}>Logout</Dropdown.Item>
           </Dropdown>

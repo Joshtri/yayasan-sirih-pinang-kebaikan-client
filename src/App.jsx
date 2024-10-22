@@ -32,6 +32,7 @@ import { element } from 'prop-types'
 import AddArticlePage from './pages/UserAuthor/AddArticlePage'
 import PreviewArticlePage from './pages/UserAuthor/PreviewArticlePage'
 import EditArticlePage from './pages/UserAuthor/EditArticlePage'
+import ProfilePage from './pages/UserAuthor/ProfilePage'
 
 function App() {
   // const user = localStorage.getItem("token");
@@ -67,12 +68,16 @@ function App() {
           <Route path='/auth/login' element={<LoginPage/>}/>
           <Route path='/auth/signup' element={<SignUpPage/>}/>
 
+          {/* <Route path='' element={} */}
+
 
                   {/* Rute Create Article, hanya bisa diakses author */}
           {/* <Route
             path="/create-article"
             element={<ProtectedRoute element={MainDashboard} allowedRoles={['author']} />}
           /> */}
+
+          <Route path='/my/author/profile' element={<ProtectedRoute element={ProfilePage} allowedRoles={['author']}/>}/>
 
           <Route path='/my/author/dashboard' element={<ProtectedRoute element={UserDashboardPage} allowedRoles={['author']}/>}/>
 

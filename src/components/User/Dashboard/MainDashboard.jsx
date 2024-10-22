@@ -7,6 +7,8 @@ function MainDashboard() {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [role, setRole] = useState('');
+  const [email, setEmail] = useState('');
+
   const [totalArticles, setTotalArticles] = useState(0); // Total artikel
   const [totalComments, setTotalComments] = useState(0); // Total komentar
   const [totalDrafts, setTotalDrafts] = useState(0); // Total draft artikel
@@ -18,11 +20,13 @@ function MainDashboard() {
     const storedFirstName = localStorage.getItem('firstName');
     const storedLastName = localStorage.getItem('lastName');
     const storedRole = localStorage.getItem('role');
+    const storedEmail = localStorage.getItem('email');
     const penulisId = localStorage.getItem('id'); // Ambil ID penulis
 
-    if (storedFirstName && storedLastName && storedRole) {
+    if (storedFirstName && storedLastName && storedRole && storedEmail) {
       setFirstName(storedFirstName);
       setLastName(storedLastName);
+      setEmail(storedEmail);
       setRole(storedRole);
     }
 
@@ -92,6 +96,7 @@ function MainDashboard() {
         </h2>
         <p className="text-gray-700 mt-2">
           Kami senang melihat Anda! Ingin membagikan ide atau tulisan Anda dengan dunia?
+          {email}
         </p>
         <div className="mt-4 flex justify-start items-center gap-4">
           <Button onClick={handleWriteArticle} gradientDuoTone="greenToBlue">
