@@ -85,13 +85,21 @@ function Article() {
                       className="w-full h-32 sm:h-40 object-cover"
                     />
                   </div>
-                  <h2 className="text-lg font-semibold mt-3">
-                    {post.judul}
-                  </h2>
-                  <p className="text-gray-600 mt-2 text-sm">
-                    {new Date(post.createdAt).toLocaleDateString('id-ID')}{' '}
-                    <span className="text-red-500">•</span> 0 Komentar
+                  <h2 className="text-lg font-semibold mt-3">{post.judul}</h2>
+
+                  {/* Date and Comment Count in the Same Line */}
+                  <p className="text-gray-600 mt-2 text-sm flex items-center">
+                    {new Date(post.createdAt).toLocaleDateString('id-ID')}
+                    <span className="mx-2 text-red-500">•</span> {/* Red bullet separator */}
+                    0 Komentar
                   </p>
+
+                  {/* Author Information */}
+                  <p className="text-gray-500 text-sm mt-1">
+                    {post.penulisId ? `By ${post.penulisId.firstName} ${post.penulisId.lastName}` : 'Penulis tidak diketahui'}
+                  </p>
+
+                  {/* Action Buttons */}
                   <div className="flex justify-between items-center mt-4">
                     <button
                       className="bg-blue-700 text-white px-3 py-2 rounded-full flex items-center space-x-2 hover:bg-blue-500 transition"

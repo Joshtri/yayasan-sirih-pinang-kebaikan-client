@@ -1,4 +1,3 @@
-// src/components/PostDetailComp.jsx
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams, useNavigate, Link } from "react-router-dom";
@@ -13,7 +12,6 @@ import CommentList from "./CommentList";
 
 function ReadArticle() {
   const [article, setArticle] = useState(null);
-  const [penulisId, setPenulisId] = useState(''); // State untuk penulisId
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const { id } = useParams();
@@ -21,8 +19,8 @@ function ReadArticle() {
   const [newComment, setNewComment] = useState(null);
 
   const handleCommentAdded = (comment) => {
-    setNewComment(comment); // Set komentar baru untuk diperbarui di CommentList
-    toast.success("Komentar berhasil ditambahkan!"); // Notifikasi berhasil
+    setNewComment(comment);
+    toast.success("Komentar berhasil ditambahkan!");
   };
 
   useEffect(() => {
@@ -34,9 +32,6 @@ function ReadArticle() {
     try {
       const response = await axios.get(`${import.meta.env.VITE_BASE_URL}/api/v1/article/${id}`);
       setArticle(response.data.data);
-      setPenulisId(response.data.data.penulisId); // Set penulisId dari respons API
-
-      // console.log(`ID dari penulis : ` , penulisId);
       setLoading(false);
     } catch (error) {
       console.error("Gagal memuat artikel:", error);
@@ -55,7 +50,7 @@ function ReadArticle() {
   const handleCopyLink = () => {
     const url = window.location.href;
     navigator.clipboard.writeText(url)
-      .then(() => toast.info("Link artikel berhasil disalin!")) // Notifikasi copy link
+      .then(() => toast.info("Link artikel berhasil disalin!"))
       .catch((err) => console.error("Gagal menyalin:", err));
   };
 
@@ -79,9 +74,8 @@ function ReadArticle() {
 
   return (
     <>
-      <ToastContainer position="top-right" autoClose={3000} /> {/* Komponen Toastify */}
+      <ToastContainer position="top-right" autoClose={3000} />
       <div className="container mx-auto px-4 py-8">
-        {/* Breadcrumbs dan Button Kembali */}
         <div className="flex justify-between items-center mb-6 ms-20">
           <nav className="text-sm">
             <ol className="list-reset flex text-gray-500 space-x-2">
@@ -102,10 +96,8 @@ function ReadArticle() {
           </button>
         </div>
 
-        {/* Article Card */}
         <div className="flex justify-center items-center min-h-screen bg-gray-100 px-4">
           <Card className="max-w-3xl w-full p-4 mt-4 mb-7">
-            {/* Buttons at the Top */}
             <div className="flex justify-end items-center space-x-2 mb-4">
               <button
                 className="px-3 py-1 text-sm rounded-md bg-green-600 text-white hover:bg-green-500 flex items-center space-x-1 transition"
@@ -123,12 +115,15 @@ function ReadArticle() {
               </button>
             </div>
 
-            {/* Article Content */}
             <div className="p-4">
               <h1 className="text-3xl font-bold text-center mb-2">{article?.judul}</h1>
-              <p className="text-center text-gray-600 mt-2">
-                <MdDateRange className="inline-block mr-2" />
-                {article?.createdAt && format(new Date(article.createdAt), "MMMM dd, yyyy")}
+              <p className="text-center text-gray-600 mt-2 flex items-center justify-center space-x-2">
+                <MdDateRange className="inline-block" />
+                <span>{article?.createdAt && format(new Date(article.createdAt), "MMMM dd, yyyy")}</span>
+                <span className="text-red-500">•</span>
+                <span>
+                  {article?.penulisId ? `${article.penulisId.firstName} ${article.penulisId.lastName}` : "Penulis tidak diketahui"}
+                </span>
               </p>
               <div className="flex justify-center mt-4">
                 <img
@@ -142,8 +137,7 @@ function ReadArticle() {
           </Card>
         </div>
 
-        {/* Komponen Form Tambah Komentar */}
-        <CommentArticle penulisId={penulisId} artikelId={id} onCommentAdded={handleCommentAdded} />
+        <CommentArticle penulisId={article?.penulisId?._id} artikelId={id} onCommentAdded={handleCommentAdded} />
         <CommentList artikelId={id} newComment={newComment} />
       </div>
     </>
