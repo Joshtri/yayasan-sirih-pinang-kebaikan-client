@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { FaShareAlt, FaBookOpen, FaFrown ,FaSmile } from 'react-icons/fa';
-import { Link, useNavigate } from 'react-router-dom';
+import {  useNavigate } from 'react-router-dom';
 import { isAuthenticated } from '../../utils/Auth'; // Import fungsi pengecekan login
 import { motion, useAnimation } from 'framer-motion';
 
