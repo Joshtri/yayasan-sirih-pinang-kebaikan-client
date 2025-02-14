@@ -74,7 +74,7 @@ const Footer = () => {
 
             {/* Bottom Text */}
             <div className="mt-6 text-center border-t border-gray-700 pt-4">
-                <p className="text-sm">&copy; 2024 Yayasan Sirih Pinang Kebaikan. All rights reserved.</p>
+            <p className="text-sm">&copy; {new Date().getFullYear()} Yayasan Sirih Pinang Kebaikan. All rights reserved.</p>
             </div>
         </footer>
     );
